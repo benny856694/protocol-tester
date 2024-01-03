@@ -25,12 +25,7 @@ func main() {
 	// Create application with options
 	err := wails.Run(&options.App{
 		Title:             "wails-reset1",
-		Width:             1024,
-		Height:            768,
-		MinWidth:          1024,
-		MinHeight:         768,
-		MaxWidth:          1280,
-		MaxHeight:         800,
+
 		DisableResize:     false,
 		Fullscreen:        false,
 		Frameless:         false,
