@@ -15,7 +15,7 @@ import React from "react";
 export default function () {
     const [count] = React.useState(0)
     return (
-        <div className="h-full  place-items-center mx-auto">
+        <div className="h-100% place-items-center mx-auto">
             <div className=" text-2xl font-bold flex flex-col items-center space-y-4">
                 <h1>Vite + React + TS + Tailwind + shadcn/ui</h1>
                 <Button onClick={() => toast("Event has been created", {
