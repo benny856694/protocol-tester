@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	"go.bug.st/serial/enumerator"
 )
 
 // App struct
@@ -41,4 +42,9 @@ func (a *App) shutdown(ctx context.Context) {
 // Greet returns a greeting for the given name
 func (a *App) Greet(name string) string {
 	return fmt.Sprintf("Hello %s, It's show time!", name)
+}
+
+func (a *App) GetSerialPortList() []*enumerator.PortDetails {
+	s, _ := enumerator.GetDetailedPortsList()
+	return s
 }

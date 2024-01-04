@@ -11,22 +11,29 @@ import {
 } from "@/components/ui/dialog"
 import { toast } from "sonner";
 import React from "react";
+import ComboBox, { ComboboxItem } from "@/components/combobox";
+import { GetSerialPortList } from "../../wailsjs/go/main/App";
+import { PortDetails } from "../models";
+
+
+
 
 export default function () {
-    const [count] = React.useState(0)
+    const [serialPorts, setSerialPorts] = React.useState<ComboboxItem[]>([])
+    const [selCom, setSelCom] = React.useState("")
+    React.useEffect( ()=>{
+         GetSerialPortList().then(data=>{
+            let ports = data as PortDetails[]
+            setSerialPorts(ports.map(item=>({ value: item.Name.toLowerCase(), label: item.Name })))
+         }) 
+    })
     return (
         <div className="h-100% place-items-center mx-auto">
+            <ComboBox items={serialPorts} selectedValue={selCom} selectPlaceHolder="请选择串口" searchPlaceHolder="搜索串口" onSelect={setSelCom} />
             <div className=" text-2xl font-bold flex flex-col items-center space-y-4">
                 <h1>Vite + React + TS + Tailwind + shadcn/ui</h1>
-                <Button onClick={() => toast("Event has been created", {
-                    description: "Sunday, December 03, 2023 at 9:00 AM",
-                    action: {
-                        label: "Undo",
-                        onClick: () => LogDebug("Undo"),
-                    },
-                })} variant="destructive">
-                    {count >= 10 && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}
-                    Count up ({count})
+                <Button>
+                    Enumerate Serial Ports
                 </Button>
                 <Dialog>
                     <DialogTrigger><Button>Show Dialog</Button></DialogTrigger>

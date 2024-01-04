@@ -8,7 +8,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className=" bg-gray-700 h-screen text-white flex flex-col">
+      <div className="  h-screen flex flex-col">
       <div>
       <NavLink to="/">Home</NavLink>
       <NavLink to="/about">About</NavLink>
