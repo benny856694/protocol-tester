@@ -9,11 +9,13 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import React from "react";
 import ComboBox, { ComboboxItem } from "@/components/combobox";
 import { GetSerialPortList } from "../../wailsjs/go/main/App";
 import { PortDetails } from "../models";
+import { EventsOn } from "../../wailsjs/runtime";
 
 
 
@@ -21,20 +23,31 @@ import { PortDetails } from "../models";
 export default function () {
     const [serialPorts, setSerialPorts] = React.useState<ComboboxItem[]>([])
     const [selCom, setSelCom] = React.useState("")
-    React.useEffect( ()=>{
-         GetSerialPortList().then(data=>{
+    const [src, setSrc] = React.useState("")
+    const [captureRecords, setCaptureRecords] = React.useState<any[]>([])
+
+    React.useEffect(() => {
+        GetSerialPortList().then(data => {
             let ports = data as PortDetails[]
-            setSerialPorts(ports.map(item=>({ value: item.Name.toLowerCase(), label: item.Name })))
-         }) 
+            setSerialPorts(ports.map(item => ({ value: item.Name.toLowerCase(), label: item.Name })))
+        })
     })
+
+    React.useEffect(()=>EventsOn('capture-record', (data)=>setCaptureRecords([data, ...captureRecords])))
+
     return (
-        <div className="h-100% place-items-center mx-auto">
+        <div className="h-100% place-items-center mx-auto ">
             <ComboBox items={serialPorts} selectedValue={selCom} selectPlaceHolder="请选择串口" searchPlaceHolder="搜索串口" onSelect={setSelCom} />
             <div className=" text-2xl font-bold flex flex-col items-center space-y-4">
                 <h1>Vite + React + TS + Tailwind + shadcn/ui</h1>
                 <Button>
                     Enumerate Serial Ports
                 </Button>
+                <Input value={src} onInput={(e) => setSrc(e.currentTarget.value)} />
+                {src && <img src={src} alt="an image" />}
+                <ul>
+                    {captureRecords.map(cr=>(<li>{cr.cap_time}</li>))}
+                </ul>
                 <Dialog>
                     <DialogTrigger><Button>Show Dialog</Button></DialogTrigger>
                     <DialogContent>

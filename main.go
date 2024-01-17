@@ -17,6 +17,7 @@ import (
 	"github.com/wailsapp/wails/v2/pkg/options/assetserver"
 	"github.com/wailsapp/wails/v2/pkg/options/mac"
 	"github.com/wailsapp/wails/v2/pkg/options/windows"
+	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
 
 //go:embed all:frontend/dist
@@ -60,11 +61,10 @@ func (h *FileLoader) ServeHTTP(res http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-
-	go echoServer()
+	app := NewApp()
+	go echoServer(app)
 
 	// Create an instance of the app structure
-	app := NewApp()
 
 	// Create application with options
 	err := wails.Run(&options.App{
@@ -128,11 +128,14 @@ func main() {
 	
 }
 
-func echoServer() {
+func echoServer(a *App) {
 	e := echo.New()
 	e.POST("/upload/record", func(c echo.Context) error {
 		var r model.CaptureRecord
 		c.Bind(&r)
+		//bytes,_ := r.Marshal()
+		//data := string(bytes)
+		runtime.EventsEmit(a.ctx, "capture-record", r)
 		return c.JSON(http.StatusOK, map[string]string{"msg": "well done"})
 	})
 	port := 8080
