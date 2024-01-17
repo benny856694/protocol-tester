@@ -2,8 +2,15 @@ package main
 
 import (
 	"embed"
+	"fmt"
+	"io"
 	"log"
+	"main/model"
+	"net/http"
+	"os"
+	_ "strings"
 
+	"github.com/labstack/echo"
 	"github.com/wailsapp/wails/v2"
 	"github.com/wailsapp/wails/v2/pkg/logger"
 	"github.com/wailsapp/wails/v2/pkg/options"
@@ -18,7 +25,44 @@ var assets embed.FS
 //go:embed build/appicon.png
 var icon []byte
 
+type FileLoader struct {
+    http.Handler
+}
+
+func NewFileLoader() *FileLoader {
+    return &FileLoader{}
+}
+
+func (h *FileLoader) ServeHTTP(res http.ResponseWriter, req *http.Request) {
+	log.Printf("%s, %s", req.URL.Path, req.Method)
+	if req.URL.Path == "/upload/record" {
+		if req.Method == "POST" {
+			bytes, _ := io.ReadAll(req.Body)
+			cr, _ := model.UnmarshalCaptureRecord(bytes)
+			json, _ := cr.Marshal()
+			log.Println(string(json))
+			res.WriteHeader(http.StatusOK)
+			res.Write([]byte(fmt.Sprint("well done")))
+		}
+	} else {
+		var err error
+		fullPath := "C:\\FaceRASystemTool" + req.URL.Path
+		println("Requesting file:", fullPath)
+		fileData, err := os.ReadFile(fullPath)
+		if err != nil {
+			res.WriteHeader(http.StatusBadRequest)
+			res.Write([]byte(fmt.Sprintf("Could not load file %s", fullPath)))
+		}
+		//res.Header().Add("content-type", "image/jpg")
+		res.Write(fileData)
+	}
+    
+}
+
 func main() {
+
+	go echoServer()
+
 	// Create an instance of the app structure
 	app := NewApp()
 
@@ -34,6 +78,7 @@ func main() {
 		BackgroundColour:  &options.RGBA{R: 255, G: 255, B: 255, A: 255},
 		AssetServer:       &assetserver.Options{
 			Assets: assets,
+			Handler: NewFileLoader(),
 		},
 		Menu:              nil,
 		Logger:            nil,
@@ -79,4 +124,21 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	
+}
+
+func echoServer() {
+	e := echo.New()
+	e.POST("/upload/record", func(c echo.Context) error {
+		var r model.CaptureRecord
+		c.Bind(&r)
+		return c.JSON(http.StatusOK, map[string]string{"msg": "well done"})
+	})
+	port := 8080
+	log.Fatal(e.Start(fmt.Sprintf(":%d", port)))
+}
+
+func use(interface{}) {
+
 }
