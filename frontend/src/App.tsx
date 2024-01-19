@@ -11,14 +11,10 @@ function App() {
     <BrowserRouter>
       <div className="  h-screen flex flex-col">
       <div>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/about">About</NavLink>
-      <NavLink to="/test">Test</NavLink>
-
       </div>
       <div className="flex-1">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Test />} />
         <Route path="/about" element={<About />} />
         <Route path="/test" element={<Test />} />
       </Routes>
