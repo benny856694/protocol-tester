@@ -25,7 +25,7 @@ export type ComboboxItem = {
 
 
 
-export default function Combobox({items, selectedValue, selectPlaceHolder, searchPlaceHolder, onSelect}: {items: ComboboxItem[], selectedValue: string, selectPlaceHolder: string,  searchPlaceHolder: string, onSelect: (item: string)=>void} ) {
+export default function Combobox({items, selectedValue, selectPlaceHolder, searchPlaceHolder, onSelect}: {items: ComboboxItem[], selectedValue?: string, selectPlaceHolder?: string,  searchPlaceHolder?: string, onSelect?: (item: string)=>void} ) {
   const [open, setOpen] = React.useState(false)
 
   return (
