@@ -53,7 +53,7 @@ export default function Combobox({items, selectedValue, selectPlaceHolder, searc
                 key={item.value}
                 value={item.value}
                 onSelect={(currentValue) => {
-                  onSelect(currentValue === selectedValue ? "" : currentValue)
+                  onSelect?.(currentValue === selectedValue ? "" : currentValue)
                   setOpen(false)
                 }}
               >
