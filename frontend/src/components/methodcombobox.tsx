@@ -19,13 +19,13 @@ import {
 } from "@/components/ui/popover"
 
 export type ComboboxItem = {
-    value: string
-    label: string
+  value: string
+  label: string
 }
 
 
 
-export default function Combobox({items, selectedValue, selectPlaceHolder, searchPlaceHolder, onSelect}: {items: ComboboxItem[], selectedValue?: string, selectPlaceHolder?: string,  searchPlaceHolder?: string, onSelect?: (item: string)=>void} ) {
+export default function MethodCombobox({ items, selectedValue, selectPlaceHolder, onSelect }: { items: ComboboxItem[], selectedValue?: string, selectPlaceHolder?: string, searchPlaceHolder?: string, onSelect?: (item: string) => void }) {
   const [open, setOpen] = React.useState(false)
 
   return (
@@ -35,7 +35,7 @@ export default function Combobox({items, selectedValue, selectPlaceHolder, searc
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-[200px] justify-between"
+          className="w-[100px] justify-between"
         >
           {selectedValue
             ? items.find((item) => item.value === selectedValue)?.label
@@ -43,10 +43,8 @@ export default function Combobox({items, selectedValue, selectPlaceHolder, searc
           <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0">
+      <PopoverContent className="p-0 w-[100px]">
         <Command>
-          <CommandInput placeholder={searchPlaceHolder} className="h-9" />
-          <CommandEmpty>No framework found.</CommandEmpty>
           <CommandGroup>
             {items.map((item) => (
               <CommandItem

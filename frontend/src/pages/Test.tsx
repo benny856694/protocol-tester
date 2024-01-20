@@ -1,12 +1,13 @@
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import Combobox, { ComboboxItem } from "@/components/combobox";
+import MethodCombobox, { ComboboxItem } from "@/components/methodcombobox";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { atom, useAtom } from 'jotai'
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { toast } from "sonner";
+import { CommandSelection } from "@/components/commandselect";
 
 let items: ComboboxItem[] = [
     { value: "get", label: "GET" },
@@ -39,7 +40,7 @@ export default function () {
     async function sendCommand() {
         setRes("")
         setBusy(true)
-       
+
         try {
             let resp = await fetch(url, {
                 method,
@@ -59,7 +60,7 @@ export default function () {
     return (
         <div className="flex flex-col h-full w-full p-2 gap-4">
             <div className="  mb-2 flex flex-row items-center gap-x-4">
-                <Combobox items={items} selectedValue={method} onSelect={(v) => setMethod(v as 'get' | 'post')} />
+                <MethodCombobox items={items} selectedValue={method} onSelect={(v) => setMethod(v as 'get' | 'post')} />
                 <Label className="flex items-center gap-2 ">URL:
                     <Input className="inline-block flex-1 w-96"
                         value={url}
@@ -74,10 +75,12 @@ export default function () {
                 </Button>
             </div>
             <div className="w-full flex-1  rounded  flex flex-col gap-2 ">
-                <Label className="flex-1 h-full flex flex-col gap-2">
-                    JSON 命令
-                    <Textarea className="flex-1" disabled={method == 'get'} value={cmd} onChange={v => setCmd(v.currentTarget.value)}></Textarea>
-                </Label>
+
+                <CommandSelection onSelectCmd={cmd=>{
+                    setCmd(JSON.stringify(cmd, null, 2))
+                }} />
+                <Textarea className="flex-1" disabled={method == 'get'} value={cmd} onChange={v => setCmd(v.currentTarget.value)}></Textarea>
+
             </div>
             <div className="w-full flex-1 rounded  flex flex-col gap-2 ">
                 <Label className="flex-1 h-full flex flex-col gap-2">

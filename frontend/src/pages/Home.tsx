@@ -12,7 +12,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import React from "react";
-import ComboBox, { ComboboxItem } from "@/components/combobox";
+import ComboBox, { ComboboxItem } from "@/components/methodcombobox";
 import { GetSerialPortList } from "../../wailsjs/go/main/App";
 import { PortDetails } from "../models";
 import { EventsOn } from "../../wailsjs/runtime";
@@ -33,7 +33,7 @@ export default function () {
         })
     })
 
-    React.useEffect(()=>EventsOn('capture-record', (data)=>setCaptureRecords([data, ...captureRecords])))
+    React.useEffect(() => EventsOn('capture-record', (data) => setCaptureRecords([data, ...captureRecords])))
 
     return (
         <div className="h-100% place-items-center mx-auto ">
@@ -46,7 +46,7 @@ export default function () {
                 <Input value={src} onInput={(e) => setSrc(e.currentTarget.value)} />
                 {src && <img src={src} alt="an image" />}
                 <ul>
-                    {captureRecords.map(cr=>(<li>{cr.cap_time}</li>))}
+                    {captureRecords.map(cr => (<li>{cr.cap_time}</li>))}
                 </ul>
                 <Dialog>
                     <DialogTrigger><Button>Show Dialog</Button></DialogTrigger>
