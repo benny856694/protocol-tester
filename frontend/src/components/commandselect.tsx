@@ -53,30 +53,28 @@ export function CommandSelection({ onSelectCmd }: { onSelectCmd?: (cmd: object) 
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-[200px]">
-                <DropdownMenuGroup>
-                    {Object.keys(commands).map(k => (
-                        <DropdownMenuSub >
-                            <DropdownMenuSubTrigger>
-                                {k}
-                            </DropdownMenuSubTrigger>
-                            <DropdownMenuSubContent className="p-0">
-                                <Command>
-                                    <CommandList id={k}>
-                                        {Object.keys(commands[k]).map(subk => (
-                                            <CommandItem key={subk} value={subk} onSelect={() => {
-                                                onSelectCmd?.(commands[k][subk])
-                                                setOpen(false)
-                                            }}>
-                                                {subk}
-                                            </CommandItem>
-                                        ))}
-                                    </CommandList>
-                                </Command>
+                {Object.keys(commands).map(k => (
+                    <DropdownMenuSub >
+                        <DropdownMenuSubTrigger>
+                            {k}
+                        </DropdownMenuSubTrigger>
+                        <DropdownMenuSubContent className="p-0">
+                            <Command>
+                                <CommandList id={k}>
+                                    {Object.keys(commands[k]).map(subk => (
+                                        <CommandItem key={subk} value={subk} onSelect={() => {
+                                            onSelectCmd?.(commands[k][subk])
+                                            setOpen(false)
+                                        }}>
+                                            {subk}
+                                        </CommandItem>
+                                    ))}
+                                </CommandList>
+                            </Command>
 
-                            </DropdownMenuSubContent>
-                        </DropdownMenuSub>
-                    ))}
-                </DropdownMenuGroup>
+                        </DropdownMenuSubContent>
+                    </DropdownMenuSub>
+                ))}
             </DropdownMenuContent>
         </DropdownMenu>
 
