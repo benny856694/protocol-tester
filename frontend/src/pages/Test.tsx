@@ -5,6 +5,7 @@ import MethodCombobox, { ComboboxItem } from "@/components/methodcombobox";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { atom, useAtom } from 'jotai'
+import { atomWithStorage } from "jotai/utils";
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { toast } from "sonner";
 import { CommandSelection } from "@/components/commandselect";
@@ -14,9 +15,11 @@ let items: ComboboxItem[] = [
     { value: "post", label: "POST" },
 ]
 
+const deviceIp = "device_ip"
+
 const methodAtom = atom<'get' | 'post'>('post')
 const jsonCommandAtom = atom('')
-const deviceUrlAtom = atom('')
+const deviceUrlAtom = atomWithStorage(deviceIp, '')
 const resAtom = atom('')
 const sendBtnDisableAtom = atom((get) => {
     const method = get(methodAtom);
