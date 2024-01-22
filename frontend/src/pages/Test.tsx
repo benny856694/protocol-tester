@@ -18,10 +18,10 @@ let items: ComboboxItem[] = [
 const deviceIp = "device_ip"
 
 const methodAtom = atom<'get' | 'post'>('post')
-const jsonCommandAtom = atom<object | null>(null)
+const jsonCommandAtom = atom<string>('')
 const readWriteJsonCommandAtom = atom(
     (get) => get(jsonCommandAtom),
-    (_, set, newValue: object | null) => {
+    (_, set, newValue:string) => {
         set(jsonCommandAtom, newValue)
         set(resAtom, '')
     })
@@ -53,7 +53,7 @@ export default function () {
         try {
             let resp = await fetch(url, {
                 method,
-                body: cmd && JSON.stringify(cmd)
+                body: cmd
             })
             await new Promise(resolve => setTimeout(resolve, 500));
             let res = await resp.json()
@@ -86,15 +86,15 @@ export default function () {
             <div className="w-full flex-1  rounded  flex flex-col gap-2 ">
                 <Label className="self-start flex gap-4 items-center">
                     <CommandSelection onSelectCmd={cmd => {
-                        setCmd(cmd)
+                        setCmd(JSON.stringify(cmd, null, 2))
                     }} />
                     {cmd && (cmd as any)['cmd']}
                 </Label>
 
                 <Textarea className="flex-1"
                     disabled={method == 'get'}
-                    value={(cmd && JSON.stringify(cmd, null, 4)) ?? ''}
-                    onChange={v => setCmd(JSON.parse(v.currentTarget.value))}>
+                    value={cmd}
+                    onInput={v => {setCmd(v.currentTarget.value)}}>
                 </Textarea>
 
             </div>
