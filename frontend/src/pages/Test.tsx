@@ -18,7 +18,7 @@ let items: ComboboxItem[] = [
 const deviceIp = "device_ip"
 
 const methodAtom = atom<'get' | 'post'>('post')
-const jsonCommandAtom = atom('')
+const jsonCommandAtom = atom<object | null>(null)
 const deviceUrlAtom = atomWithStorage(deviceIp, '')
 const resAtom = atom('')
 const sendBtnDisableAtom = atom((get) => {
@@ -47,7 +47,7 @@ export default function () {
         try {
             let resp = await fetch(url, {
                 method,
-                body: cmd
+                body: cmd && JSON.stringify(cmd)
             })
             await new Promise(resolve => setTimeout(resolve, 500));
             let res = await resp.json()
@@ -78,11 +78,18 @@ export default function () {
                 </Button>
             </div>
             <div className="w-full flex-1  rounded  flex flex-col gap-2 ">
+                <Label className="self-start flex gap-4 items-center">
+                    <CommandSelection onSelectCmd={cmd => {
+                        setCmd(cmd)
+                    }} />
+                    {cmd && (cmd as any)['cmd']}
+                </Label>
 
-                <CommandSelection onSelectCmd={cmd=>{
-                    setCmd(JSON.stringify(cmd, null, 2))
-                }} />
-                <Textarea className="flex-1" disabled={method == 'get'} value={cmd} onChange={v => setCmd(v.currentTarget.value)}></Textarea>
+                <Textarea className="flex-1"
+                    disabled={method == 'get'}
+                    value={(cmd && JSON.stringify(cmd, null, 4)) ?? ''}
+                    onChange={v => setCmd(JSON.parse(v.currentTarget.value))}>
+                </Textarea>
 
             </div>
             <div className="w-full flex-1 rounded  flex flex-col gap-2 ">
