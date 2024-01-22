@@ -18,6 +18,8 @@ import { toast } from "sonner";
 import { CommandSelection } from "@/components/commandselect";
 import { isValidJSON } from "@/lib/utils";
 import { z } from "zod";
+import { useTranslation, Trans } from 'react-i18next';
+import i18next from "i18next";
 
 let items: ComboboxItem[] = [
     { value: "get", label: "GET" },
@@ -79,6 +81,7 @@ export default function () {
     const [busy, setBusy] = useState(false)
     const [jsonValidateMsg] = useAtom(jsonValidateMsgAtom)
     const [selCommand] = useAtom(selectedCommandAtom)
+    const { t } = useTranslation()
     async function sendCommand() {
         setRes("")
         setBusy(true)
@@ -123,13 +126,12 @@ export default function () {
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
-
                 </Label>
                 <Button
                     disabled={sendButtonDisabled || busy}
                     onClick={sendCommand}>
                     {busy && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}
-                    发送命令
+                    发送命令 {t('key')} {i18next.resolvedLanguage}
                 </Button>
             </div>
             <div className="w-full flex-1  rounded  flex flex-col gap-2 ">

@@ -75,7 +75,7 @@ func main() {
 		Frameless:         false,
 		StartHidden:       false,
 		HideWindowOnClose: false,
-		//BackgroundColour:  &options.RGBA{R: 255, G: 255, B: 255, A: 255},
+		BackgroundColour:  options.NewRGB(0,0,0),// RGBA{R: 255, G: 255, B: 255, A: 0},
 		AssetServer:       &assetserver.Options{
 			Assets: assets,
 			Handler: NewFileLoader(),
