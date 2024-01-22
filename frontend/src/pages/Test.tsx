@@ -39,6 +39,14 @@ const jsonValidateMsgAtom = atom((get) => {
         }
     }
 })
+const selectedCommandAtom = atom((get)=>{
+    const jsonValidateMsg = get(jsonValidateMsgAtom)
+    const json = get(jsonCommandAtom)
+    if (jsonValidateMsg) {
+        return ""
+    } 
+    return JSON.parse(json).cmd
+})
 const deviceUrlAtom = atomWithStorage(deviceIp, '')
 const resAtom = atom('')
 const sendBtnDisableAtom = atom((get) => {
@@ -49,7 +57,7 @@ const sendBtnDisableAtom = atom((get) => {
     if (method === 'get') {
         return !url
     } else {
-        return !url || !jsonCmd || jsonValidateMsg
+        return !url || !jsonCmd || !!jsonValidateMsg
     }
 })
 
@@ -62,6 +70,7 @@ export default function () {
     const [sendButtonDisabled] = useAtom(sendBtnDisableAtom)
     const [busy, setBusy] = useState(false)
     const [jsonValidateMsg] = useAtom(jsonValidateMsgAtom)
+    const [selCommand] = useAtom(selectedCommandAtom)
     async function sendCommand() {
         setRes("")
         setBusy(true)
@@ -104,7 +113,7 @@ export default function () {
                     <CommandSelection onSelectCmd={cmd => {
                         setCmd(JSON.stringify(cmd, null, 2))
                     }} />
-                    {cmd && (cmd as any)['cmd']}
+                    {selCommand}
                 </Label>
 
                 <Textarea className="flex-1"
