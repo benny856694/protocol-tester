@@ -119,7 +119,7 @@ export default function () {
                                     placeholder="Url或IP" />
                             </TooltipTrigger>
                             <TooltipContent>
-                                <p>输入IP地址, 或者Url(如: http://192.168.0.167:800)</p>
+                                <p>输入IP地址, 或者Url(如: http://192.168.0.167:8000)</p>
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
