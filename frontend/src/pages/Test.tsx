@@ -9,6 +9,7 @@ import { atomWithStorage } from "jotai/utils";
 import { ReloadIcon } from "@radix-ui/react-icons"
 import { toast } from "sonner";
 import { CommandSelection } from "@/components/commandselect";
+import { isValidJSON } from "@/lib/utils";
 
 let items: ComboboxItem[] = [
     { value: "get", label: "GET" },
@@ -21,20 +22,34 @@ const methodAtom = atom<'get' | 'post'>('post')
 const jsonCommandAtom = atom<string>('')
 const readWriteJsonCommandAtom = atom(
     (get) => get(jsonCommandAtom),
-    (_, set, newValue:string) => {
+    (_, set, newValue: string) => {
         set(jsonCommandAtom, newValue)
         set(resAtom, '')
     })
+const jsonValidateMsgAtom = atom((get) => {
+    const json = get(jsonCommandAtom)
+    const method = get(methodAtom)
+    if (method == 'get') {
+        return ''
+    } else {
+        if (!json) {
+            return "命令为空"
+        } else {
+            return isValidJSON(json) ? "" : "JSON格式错误"
+        }
+    }
+})
 const deviceUrlAtom = atomWithStorage(deviceIp, '')
 const resAtom = atom('')
 const sendBtnDisableAtom = atom((get) => {
     const method = get(methodAtom);
     const url = get(deviceUrlAtom);
     const jsonCmd = get(jsonCommandAtom)
+    const jsonValidateMsg = get(jsonValidateMsgAtom)
     if (method === 'get') {
         return !url
     } else {
-        return !url || !jsonCmd
+        return !url || !jsonCmd || jsonValidateMsg
     }
 })
 
@@ -46,6 +61,7 @@ export default function () {
     const [cmd, setCmd] = useAtom(readWriteJsonCommandAtom)
     const [sendButtonDisabled] = useAtom(sendBtnDisableAtom)
     const [busy, setBusy] = useState(false)
+    const [jsonValidateMsg] = useAtom(jsonValidateMsgAtom)
     async function sendCommand() {
         setRes("")
         setBusy(true)
@@ -93,9 +109,11 @@ export default function () {
 
                 <Textarea className="flex-1"
                     disabled={method == 'get'}
+                    aria-errormessage={jsonValidateMsg}
                     value={cmd}
-                    onInput={v => {setCmd(v.currentTarget.value)}}>
+                    onInput={v => { setCmd(v.currentTarget.value) }}>
                 </Textarea>
+                {jsonValidateMsg && <Label className="text-red-600 text-sm self-start">{jsonValidateMsg}</Label>}
 
             </div>
             <div className="w-full flex-1 rounded  flex flex-col gap-2 ">
