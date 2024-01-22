@@ -1,11 +1,11 @@
-const commands: { [index: string]: { [index: string]: object } } = {
+{
   "人员管理": {
     "upload person(无图注册)": {
       "cmd": "upload person",
       "id": "0001",
       "name": "XiaoMing",
       "role": 1,
-      "kind": 2,
+      "kind": 2
     },
     "upload person(有图注册)": {
       "version": "0.9",
@@ -16,7 +16,7 @@ const commands: { [index: string]: { [index: string]: object } } = {
       "reg_image": "",
       "wg_card_id": 0,
       "term": "forever",
-      "term_start": "useless",
+      "term_start": "useless"
     },
     "request person(查询人员)": {
       "cmd": "request persons",
@@ -27,25 +27,25 @@ const commands: { [index: string]: { [index: string]: object } } = {
       "image_flag": 1,
       "query_mode": 1,
       "condition": {
-        "person_name": "",
-      },
+        "person_name": ""
+      }
     },
     "get allpersonid(获取所有人员ID)": {
-      "cmd": "get allpersonid",
+      "cmd": "get allpersonid"
     },
     "delete person(s)(删除人员)": {
       "cmd": "delete person(s)",
       "flag": -1,
-      "id": "123aa",
+      "id": "123aa"
     },
     "img to feature(获取特征值数据)": {
       "cmd": "img to feature",
       "data": [
         {
           "uid": "123465",
-          "image": "",
-        },
-      ],
+          "image": ""
+        }
+      ]
     },
     "register by feature(注册特征值数据)": {
       "cmd": "register by feature",
@@ -54,8 +54,8 @@ const commands: { [index: string]: { [index: string]: object } } = {
         "APAbAgoS0gAf4gu+9gn07PXlyjMU+NsO9Q3tBi/t//klFuwJ89IDC/kqAesO/ePj9s0h3/L8BuwDBv8T//T/5rrg2QT53+747/0CCw0Y7RcWBwsMA9oPCxoi6vb3Fwng+jD1HtXsBwoW5cgv8g/WCAgX+O//LRAW8Mfv0BoP+Rb9CPvx7P7t8Cr57xztD/0C7/n8Fxj78eXn9xsbCSnaHSj94gEC+CMIKvoi7u8DDCD96fMnD9jjGQjxBhQB9Cb8+ycC9f/e7Q77A/YxK+T29f7+DObt/Av+8P8nAPHpAwAnDAb67+n8FB4C8swM/CDV5jfxAwXu7PH6BRYlFRgA+tepBC07",
       "id": "123321",
       "name": "ysx",
-      "role": 1,
-    },
+      "role": 1
+    }
   },
   "设备控制": {
     "gpio control(开闸)": {
@@ -63,7 +63,7 @@ const commands: { [index: string]: { [index: string]: object } } = {
       "port": 1,
       "ctrl_type": "on",
       "ctrl_mode": "force",
-      "person_id": "0001",
+      "person_id": "0001"
     },
     "gpio control Extend(开闸+语音)": {
       "cmd": "gpio control Extend",
@@ -71,11 +71,11 @@ const commands: { [index: string]: { [index: string]: object } } = {
       "ctrl_type": "on",
       "ctrl_mode": "force",
       "person_id": "0001",
-      "voicePlay": "No0.pass.wav",
+      "voicePlay": "No0.pass.wav"
     },
     "tts play(tts播放)": {
       "cmd": "tts play",
-      "text": "TTS播放",
+      "text": "TTS播放"
     },
     "text display(文字显示)": {
       "cmd": "text display",
@@ -83,79 +83,79 @@ const commands: { [index: string]: { [index: string]: object } } = {
       "text_list": [
         {
           "position": {
-            x: 0,
-            y: 500,
+            "x": 0,
+            "y": 500
           },
           "alive_time": 1000,
           "font_size": 100,
           "font_spacing": 1,
           "font_color": "0xffffffff",
-          "text": "你好",
+          "text": "你好"
         },
         {
           "position": {
-            x: 0,
-            y: 610,
+            "x": 0,
+            "y": 610
           },
           "alive_time": 1000,
           "font_size": 100,
           "font_spacing": 1,
           "font_color": "0xff00ff00",
-          "text": "消费100",
-        },
-      ],
+          "text": "消费100"
+        }
+      ]
     },
     "image display(图片显示)": {
       "cmd": "image display",
       "position": {
-        x: 20,
-        y: 20,
+        "x": 20,
+        "y": 20
       },
       "alive_time": 5000,
       "format": "jpg",
-      "image_data": "",
+      "image_data": ""
     },
     "snap shot(截图)": {
-      "cmd": "snapshot",
+      "cmd": "snapshot"
     },
     "wiegand control(韦根控制)": {
       "cmd": "wiegand control",
       "wiegand_card_no": 0,
       "long_card_id": 9223372036854775807,
       "ctrl_mode": "force",
-      "person_id": "0001",
-    },
+      "person_id": "0001"
+    }
   },
   "设备参数": {
     "request app params(请求应用参数)": {
-      "cmd": "request app params",
+      "cmd": "request app params"
     },
     "camera volume(相机音量)": {
       "cmd": "camera volume",
       "method": "SET",
-      "volume": 50,
+      "volume": 50
     },
     "reset app param(重置应用参数)": {
-      "cmd": "reset app params",
+      "cmd": "reset app params"
     },
     "update app params(更新应用参数)": {
       "auth": {
         "enable": false,
         "password": "admin",
-        "username": "admin",
+        "username": "admin"
       },
       "cmd": "update app params",
       "code": 0,
       "device_info": {
         "addr_name": "addr_name_test",
         "addr_no": "addr_no_test",
-        "device_no": "",
+        "device_no": ""
       },
       "extranet": {
         "enable": true,
         "mode": "tcp",
         "server_domain": "a.b.com",
-        "server_port": 10001,
+        "server_port": 10001
       },
       "face": {
         "alive_level": 1,
@@ -169,7 +169,7 @@ const commands: { [index: string]: { [index: string]: object } } = {
           "multi_frame_confir": false,
           "outdoor": false,
           "range_max": 42.0,
-          "range_min": 35.0,
+          "range_min": 35.0
         },
         "card": {
           "managerCardEnable": false,
@@ -181,7 +181,7 @@ const commands: { [index: string]: { [index: string]: object } } = {
           "regist_user_by_card": false,
           "regist_user_valid_period": 1,
           "tempUserDuration": 60,
-          "temp_user_duration": 3600,
+          "temp_user_duration": 3600
         },
         "derep_timeout": 3,
         "enable_age": false,
@@ -196,13 +196,13 @@ const commands: { [index: string]: { [index: string]: object } } = {
         "enable_temperatur": false,
         "hat": {
           "enable": false,
-          "must_wear_hat": false,
+          "must_wear_hat": false
         },
         "mask": {
           "enable": false,
           "mask_match_enable": true,
           "must_wear_mask": true,
-          "no_mask_alarm": false,
+          "no_mask_alarm": false
         },
         "match_mode": "normal",
         "match_score": 80,
@@ -217,7 +217,7 @@ const commands: { [index: string]: { [index: string]: object } } = {
         "valid_angle": 36,
         "valid_angle_enable": true,
         "valid_qvalue_enable": false,
-        "work_mode": "offline",
+        "work_mode": "offline"
       },
       "gate_control": {
         "gate_mode": 1,
@@ -230,58 +230,58 @@ const commands: { [index: string]: { [index: string]: object } } = {
         "wg_create_id_end": 20000,
         "wg_id_public": 8,
         "wg_linked": false,
-        "wg_protocol": "wg26",
+        "wg_protocol": "wg26"
       },
       "language": 0,
       "lcd_control": {
         "lcd_display_item": 4294967295,
         "lcd_title": "",
-        "led_mirror": true,
+        "led_mirror": true
       },
       "led_control": {
         "led_brightness": 70,
         "led_mode": 3,
-        "led_sensitivity": "mid",
+        "led_sensitivity": "mid"
       },
       "name_list": {
-        "auto_clean": false,
+        "auto_clean": false
       },
       "ntp": {
         "enable": false,
         "server_domain": "ntp1.aliyun.com",
-        "update_cycle": 60,
+        "update_cycle": 60
       },
       "qr_code_control": {
         "enable": true,
-        "repeat_interval": 0,
+        "repeat_interval": 0
       },
       "record": {
         "resume_enable": true,
         "save_enable": true,
-        "save_path": "EMMC",
+        "save_path": "EMMC"
       },
       "remote_upgrader": {
         "enable": false,
         "server_ip": "",
         "server_port": 0,
-        "server_uri": "",
+        "server_uri": ""
       },
       "reply": "ACK",
       "upload_info": {
         "method": "tcp",
         "server_domain": "a.c.com",
-        "server_port": 10002,
-      },
+        "server_port": 10002
+      }
     },
     "Visitor Qrcode config(设置二维码参数)": {
       "cmd": "Visitor Qrcode config",
       "community_id": 1,
-      "KeySecret": "567502e0e087c22b",
-    },
+      "KeySecret": "567502e0e087c22b"
+    }
   },
   "调度管理": {
     "request shedule param(查询调度规则)": {
-      "cmd": "request schedule params",
+      "cmd": "request schedule params"
     },
 
     "update shedule param(更新调度规则)": {
@@ -297,26 +297,26 @@ const commands: { [index: string]: { [index: string]: object } } = {
                 {
                   "start": {
                     "hour": 0,
-                    "minute": 0,
+                    "minute": 0
                   },
                   "end": {
                     "hour": 12,
-                    "minute": 59,
-                  },
+                    "minute": 59
+                  }
                 },
                 {
                   "start": {
                     "hour": 13,
-                    "minute": 0,
+                    "minute": 0
                   },
                   "end": {
                     "hour": 23,
-                    "minute": 59,
-                  },
-                },
-              ],
-            },
-          ],
+                    "minute": 59
+                  }
+                }
+              ]
+            }
+          ]
         },
         {
           "name": "按周调度示例",
@@ -328,112 +328,112 @@ const commands: { [index: string]: { [index: string]: object } } = {
                 {
                   "start": {
                     "hour": 0,
-                    "minute": 0,
+                    "minute": 0
                   },
                   "end": {
                     "hour": 23,
-                    "minute": 59,
-                  },
-                },
-              ],
+                    "minute": 59
+                  }
+                }
+              ]
             },
             {
               "sections": [
                 {
                   "start": {
                     "hour": 3,
-                    "minute": 0,
+                    "minute": 0
                   },
                   "end": {
                     "hour": 20,
-                    "minute": 0,
-                  },
-                },
-              ],
+                    "minute": 0
+                  }
+                }
+              ]
             },
             {
               "sections": [
                 {
                   "start": {
                     "hour": 4,
-                    "minute": 0,
+                    "minute": 0
                   },
                   "end": {
                     "hour": 23,
-                    "minute": 0,
-                  },
-                },
-              ],
+                    "minute": 0
+                  }
+                }
+              ]
             },
             {
               "sections": [
                 {
                   "start": {
                     "hour": 6,
-                    "minute": 0,
+                    "minute": 0
                   },
                   "end": {
                     "hour": 20,
-                    "minute": 0,
-                  },
+                    "minute": 0
+                  }
                 },
                 {
                   "start": {
                     "hour": 23,
-                    "minute": 0,
+                    "minute": 0
                   },
                   "end": {
                     "hour": 23,
-                    "minute": 10,
-                  },
-                },
-              ],
+                    "minute": 10
+                  }
+                }
+              ]
             },
             {
               "sections": [
                 {
                   "start": {
                     "hour": 0,
-                    "minute": 0,
+                    "minute": 0
                   },
                   "end": {
                     "hour": 23,
-                    "minute": 59,
-                  },
-                },
-              ],
+                    "minute": 59
+                  }
+                }
+              ]
             },
             {
               "sections": [
                 {
                   "start": {
                     "hour": 0,
-                    "minute": 0,
+                    "minute": 0
                   },
                   "end": {
                     "hour": 23,
-                    "minute": 59,
-                  },
-                },
-              ],
+                    "minute": 59
+                  }
+                }
+              ]
             },
             {
               "sections": [
                 {
                   "start": {
                     "hour": 0,
-                    "minute": 0,
+                    "minute": 0
                   },
                   "end": {
                     "hour": 23,
-                    "minute": 59,
-                  },
-                },
-              ],
-            },
-          ],
-        },
-      ],
+                    "minute": 59
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
     },
     "set params(节假日规则)": {
       "cmd": "set params",
@@ -442,15 +442,15 @@ const commands: { [index: string]: { [index: string]: object } } = {
           "festival_num": 1,
           "festival_txt_0": "国庆节",
           "festival_term_start_0": 1696089600,
-          "festival_term_end_0": 1696608000,
-        },
-      },
-    },
+          "festival_term_end_0": 1696608000
+        }
+      }
+    }
   },
   "抓拍管理": {
     "delete record(删除抓拍记录)": {
       "cmd": "delete record",
-      "sequnce": 24,
+      "sequnce": 24
     },
     "request records(查询抓拍记录)": {
       "cmd": "request records",
@@ -460,50 +460,50 @@ const commands: { [index: string]: { [index: string]: object } } = {
       "reg_image_flag": 0,
       "upload_state": 0,
       "fuzzy_flag": 1,
-      "name": "林星",
-    },
+      "name": "林星"
+    }
   },
   "设备时间": {
     "request date time(请求时间)": {
-      "cmd": "request date time",
+      "cmd": "request date time"
     },
     "update date time(更新时间)": {
       "cmd": "update date time",
-      date_time: "2018/11/23 16:00:00",
+      "date_time": "2018/11/23 16:00:00",
       "timezone": "UTC+8",
       "12hour_time": false,
-      "auto_dst": false,
-    },
+      "auto_dst": false
+    }
   },
   "设备授权": {
     "authorization(旧命令授权)": {
       "cmd": "authorization",
       "auth_id": 2,
-      "auth_code": "xxxxxxxxxxx",
+      "auth_code": "xxxxxxxxxxx"
     },
     "func auth(新命令授权)": {
       "cmd": "func auth",
       "functionNo": 2,
-      "license": "xxxxxxxxx",
+      "license": "xxxxxxxxx"
     },
     "inquire authorization(旧命令查询授权状态)": {
       "cmd": "inquire authorization",
-      "auth_id": 2,
+      "auth_id": 2
     },
     "query func auth(新命令查询授权状态)": {
       "cmd": "query func auth",
-      "functionNo": 2,
+      "functionNo": 2
     },
     "func auth cancel(取消授权)": {
       "cmd": "func auth cancel",
-      "functionNo": 2,
-    },
+      "functionNo": 2
+    }
   },
   "其他功能": {
     "send seial data(发送串口数据)": {
       "cmd": "send serial data",
       "device_no": 1,
-      "content": [121, 1, 5, 25, 26],
+      "content": [121, 1, 5, 25, 26]
     },
     "heart beat(心跳)": {
       "addr_name": "150",
@@ -513,7 +513,7 @@ const commands: { [index: string]: { [index: string]: object } } = {
       "device_sn": "0123E4-FB5BFC-9186EE",
       "ip": "192.168.0.150",
       "version": "0.42",
-      "command_id": "",
+      "command_id": ""
     },
     "add snap records(考勤补录)": {
       "records": [
@@ -523,15 +523,13 @@ const commands: { [index: string]: { [index: string]: object } } = {
           "image": "",
           "time": 1683620243,
           "worksite_id": "000116",
-          "customer_text": "421202199005126215",
-        },
+          "customer_text": "421202199005126215"
+        }
       ],
-      "cmd": "add snap records",
+      "cmd": "add snap records"
     },
     "get version(获取版本信息)": {
-      "cmd": "get version",
-    },
-  },
-};
-
-export default commands;
+      "cmd": "get version"
+    }
+  }
+}

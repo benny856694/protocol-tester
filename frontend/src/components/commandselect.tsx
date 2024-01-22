@@ -27,7 +27,9 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { CaretSortIcon } from "@radix-ui/react-icons"
 
-import commands from '@/assets/commands'
+import _commands from '@/assets/commands.json'
+
+const commands: { [index: string]: { [index: string]: object } } = _commands
 
 const labels = [
     "feature",
@@ -38,6 +40,8 @@ const labels = [
     "question",
     "maintenance",
 ]
+
+
 
 
 export function CommandSelection({placeHolder, onSelectCmd }: {placeHolder: string, onSelectCmd?: (cmd: object) => void }) {
