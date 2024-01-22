@@ -40,7 +40,7 @@ const labels = [
 ]
 
 
-export function CommandSelection({ onSelectCmd }: { onSelectCmd?: (cmd: object) => void }) {
+export function CommandSelection({placeHolder, onSelectCmd }: {placeHolder: string, onSelectCmd?: (cmd: object) => void }) {
     const [label, setLabel] = React.useState("feature")
     const [open, setOpen] = React.useState(false)
 
@@ -48,7 +48,7 @@ export function CommandSelection({ onSelectCmd }: { onSelectCmd?: (cmd: object) 
         <DropdownMenu open={open} onOpenChange={setOpen}>
             <DropdownMenuTrigger asChild>
                 <Button variant="outline" size="sm">
-                    选择命令
+                    {placeHolder}
                     <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </DropdownMenuTrigger>

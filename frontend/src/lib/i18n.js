@@ -1,6 +1,8 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+import zh from '../assets/locales/zh/translation.json'
+import en from '../assets/locales/en/translation.json'
 
 
 i18n
@@ -19,15 +21,10 @@ i18n
     },
     resources: {
       en: {
-        translation: {
-          // here we will place our translations...
-          key: "Cool",
-        }
+        translation: en,
       },
       zh: {
-        translation: {
-            key: "不错",
-        }
+        translation: zh,
       }
     }
   });

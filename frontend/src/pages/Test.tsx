@@ -131,12 +131,12 @@ export default function () {
                     disabled={sendButtonDisabled || busy}
                     onClick={sendCommand}>
                     {busy && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}
-                    发送命令 {t('key')} {i18next.resolvedLanguage}
+                    发送命令
                 </Button>
             </div>
             <div className="w-full flex-1  rounded  flex flex-col gap-2 ">
                 <Label className="self-start flex gap-4 items-center">
-                    <CommandSelection onSelectCmd={cmd => {
+                    <CommandSelection placeHolder={t('select-command')} onSelectCmd={cmd => {
                         setCmd(JSON.stringify(cmd, null, 2))
                     }} />
                     {selCommand}
