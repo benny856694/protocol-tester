@@ -1,6 +1,13 @@
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip"
+
 import MethodCombobox, { ComboboxItem } from "@/components/methodcombobox";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -10,6 +17,7 @@ import { ReloadIcon } from "@radix-ui/react-icons"
 import { toast } from "sonner";
 import { CommandSelection } from "@/components/commandselect";
 import { isValidJSON } from "@/lib/utils";
+import { z } from "zod";
 
 let items: ComboboxItem[] = [
     { value: "get", label: "GET" },
@@ -39,13 +47,13 @@ const jsonValidateMsgAtom = atom((get) => {
         }
     }
 })
-const selectedCommandAtom = atom((get)=>{
+const selectedCommandAtom = atom((get) => {
     const jsonValidateMsg = get(jsonValidateMsgAtom)
     const json = get(jsonCommandAtom)
     if (jsonValidateMsg) {
         return ""
-    } 
-    return JSON.parse(json).cmd
+    }
+    return JSON.parse(json).cmd ?? ""
 })
 const deviceUrlAtom = atomWithStorage(deviceIp, '')
 const resAtom = atom('')
@@ -65,7 +73,7 @@ const sendBtnDisableAtom = atom((get) => {
 export default function () {
     const [method, setMethod] = useAtom(methodAtom)
     const [res, setRes] = useAtom(resAtom)
-    const [url, setUrl] = useAtom(deviceUrlAtom)
+    const [urlOrIp, setUrl] = useAtom(deviceUrlAtom)
     const [cmd, setCmd] = useAtom(readWriteJsonCommandAtom)
     const [sendButtonDisabled] = useAtom(sendBtnDisableAtom)
     const [busy, setBusy] = useState(false)
@@ -74,13 +82,19 @@ export default function () {
     async function sendCommand() {
         setRes("")
         setBusy(true)
+        const ip = z.string().ip({ version: 'v4' })
+
+        let url = urlOrIp;
+        if (ip.safeParse(urlOrIp).success) {
+            url = `http://${urlOrIp}:8000`
+        }
 
         try {
             let resp = await fetch(url, {
                 method,
                 body: cmd
             })
-            await new Promise(resolve => setTimeout(resolve, 500));
+            await new Promise(resolve => setTimeout(resolve, 250));
             let res = await resp.json()
             setRes(JSON.stringify(res, null, 2))
         } catch (error) {
@@ -96,10 +110,20 @@ export default function () {
             <div className="  mb-2 flex flex-row items-center gap-x-4">
                 <MethodCombobox items={items} selectedValue={method} onSelect={(v) => setMethod(v as 'get' | 'post')} />
                 <Label className="flex items-center gap-2 ">URL:
-                    <Input className="inline-block flex-1 w-96"
-                        value={url}
-                        onInput={v => setUrl(v.currentTarget.value)}
-                        placeholder="设备Url (http://192.168.0.167:8000)" />
+                    <TooltipProvider>
+                        <Tooltip delayDuration={0}>
+                            <TooltipTrigger asChild>
+                                <Input className="inline-block flex-1 w-96"
+                                    value={urlOrIp}
+                                    onInput={v => setUrl(v.currentTarget.value)}
+                                    placeholder="Url或IP" />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>输入IP地址, 或者Url(如: http://192.168.0.167:800)</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+
                 </Label>
                 <Button
                     disabled={sendButtonDisabled || busy}
