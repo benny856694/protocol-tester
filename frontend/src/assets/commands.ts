@@ -1,5 +1,5 @@
 const commands: { [index: string]: { [index: string]: object } } = {
-  人员管理: {
+  "人员管理": {
     "upload person(无图注册)": {
       "cmd:": "upload person",
       "id:": "0001",
