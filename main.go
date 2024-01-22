@@ -68,7 +68,7 @@ func main() {
 
 	// Create application with options
 	err := wails.Run(&options.App{
-		Title:             "wails-reset1",
+		Title:             "协议测试",
 
 		DisableResize:     false,
 		Fullscreen:        false,
