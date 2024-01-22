@@ -19,6 +19,12 @@ const deviceIp = "device_ip"
 
 const methodAtom = atom<'get' | 'post'>('post')
 const jsonCommandAtom = atom<object | null>(null)
+const readWriteJsonCommandAtom = atom(
+    (get) => get(jsonCommandAtom),
+    (_, set, newValue: object | null) => {
+        set(jsonCommandAtom, newValue)
+        set(resAtom, '')
+    })
 const deviceUrlAtom = atomWithStorage(deviceIp, '')
 const resAtom = atom('')
 const sendBtnDisableAtom = atom((get) => {
@@ -37,7 +43,7 @@ export default function () {
     const [method, setMethod] = useAtom(methodAtom)
     const [res, setRes] = useAtom(resAtom)
     const [url, setUrl] = useAtom(deviceUrlAtom)
-    const [cmd, setCmd] = useAtom(jsonCommandAtom)
+    const [cmd, setCmd] = useAtom(readWriteJsonCommandAtom)
     const [sendButtonDisabled] = useAtom(sendBtnDisableAtom)
     const [busy, setBusy] = useState(false)
     async function sendCommand() {
