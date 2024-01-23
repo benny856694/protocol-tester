@@ -115,7 +115,7 @@ export default function () {
     async function openInBrowser() {
         const url = buildUrl(urlOrIp, true)
         
-        await OpenInBrowser(url, '')
+        await OpenInBrowser(url, [])
     }
 
     return (

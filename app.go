@@ -52,7 +52,7 @@ func (a *App) GetSerialPortList() []*enumerator.PortDetails {
 	return s
 }
 
-func (a *App) OpenInBrowser(url string, arguments string) error {
+func (a *App) OpenInBrowser(url string, arguments []string) error {
 	var cmd string
     var args []string
 
@@ -67,6 +67,6 @@ func (a *App) OpenInBrowser(url string, arguments string) error {
     }
 
     args = append(args, url)
-	args = append(args, arguments)
+	args = append(args, arguments...)
     return exec.Command(cmd, args...).Start()
 }

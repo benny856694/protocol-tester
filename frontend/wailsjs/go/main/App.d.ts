@@ -6,4 +6,4 @@ export function GetSerialPortList():Promise<Array<enumerator.PortDetails>>;
 
 export function Greet(arg1:string):Promise<string>;
 
-export function OpenInBrowser(arg1:string,arg2:string):Promise<void>;
+export function OpenInBrowser(arg1:string,arg2:Array<string>):Promise<void>;
