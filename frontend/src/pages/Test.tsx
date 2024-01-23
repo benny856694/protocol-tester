@@ -169,7 +169,7 @@ export default function () {
                 </TooltipProvider>
 
             </div>
-            <div className="flex-1 flex flex-col gap-2 overflow-y-auto">
+            <div className="flex-1 flex flex-col gap-2">
                 <Label className="self-start flex gap-4 items-center">
                     <CommandSelection placeHolder={t('select-command')} onSelectCmd={cmd => {
                         setCmd(JSON.stringify(cmd, null, 2))
@@ -189,15 +189,15 @@ export default function () {
             {
                 res &&
                 <div className="flex-1 flex flex-col gap-2 overflow-y-auto relative">
-                    <div className="flex justify-start gap-2 sticky top-0 bg-background">
+                    <div className="flex justify-start items-center gap-2 sticky top-0 bg-background">
                         <Label> {t('response')}</Label>
                         <Button variant="ghost" className="h-4 w-4 p-0" onClick={() => setRes(null)}>
                             <TrashIcon />
                         </Button>
                     </div>
-                    <div className="flex-1">
-                        <JsonViewer theme="dark" value={res} />
-                    </div>
+                    
+                        <JsonViewer className="flex-1" theme="dark" value={res} />
+                   
                 </div>
             }
 
