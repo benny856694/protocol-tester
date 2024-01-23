@@ -3,6 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
+	"os/exec"
+	"runtime"
+
 	"go.bug.st/serial/enumerator"
 )
 
@@ -47,4 +50,23 @@ func (a *App) Greet(name string) string {
 func (a *App) GetSerialPortList() []*enumerator.PortDetails {
 	s, _ := enumerator.GetDetailedPortsList()
 	return s
+}
+
+func (a *App) OpenInBrowser(url string, arguments string) error {
+	var cmd string
+    var args []string
+
+    switch runtime.GOOS {
+    case "windows":
+        cmd = "cmd"
+        args = []string{"/c", "start"}
+    case "darwin":
+        cmd = "open"
+    default: // "linux", "freebsd", "openbsd", "netbsd"
+        cmd = "xdg-open"
+    }
+
+    args = append(args, url)
+	args = append(args, arguments)
+    return exec.Command(cmd, args...).Start()
 }

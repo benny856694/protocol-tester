@@ -5,3 +5,5 @@ import {enumerator} from '../models';
 export function GetSerialPortList():Promise<Array<enumerator.PortDetails>>;
 
 export function Greet(arg1:string):Promise<string>;
+
+export function OpenInBrowser(arg1:string,arg2:string):Promise<void>;

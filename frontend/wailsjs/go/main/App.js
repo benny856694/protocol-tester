@@ -9,3 +9,7 @@ export function GetSerialPortList() {
 export function Greet(arg1) {
   return window['go']['main']['App']['Greet'](arg1);
 }
+
+export function OpenInBrowser(arg1, arg2) {
+  return window['go']['main']['App']['OpenInBrowser'](arg1, arg2);
+}

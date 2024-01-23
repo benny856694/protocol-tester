@@ -13,12 +13,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { atom, useAtom } from 'jotai'
 import { atomWithStorage } from "jotai/utils";
-import { GlobeIcon, PaperPlaneIcon, ReloadIcon } from "@radix-ui/react-icons"
+import { ExternalLinkIcon, GlobeIcon, PaperPlaneIcon, ReloadIcon } from "@radix-ui/react-icons"
 import { toast } from "sonner";
 import { CommandSelection } from "@/components/commandselect";
-import { isValidJSON } from "@/lib/utils";
+import { buildUrl, isValidJSON } from "@/lib/utils";
 import { z } from "zod";
 import { useTranslation, Trans } from 'react-i18next';
+import { OpenInBrowser } from "../../wailsjs/go/main/App";
 import i18next from "i18next";
 
 let items: ComboboxItem[] = [
@@ -71,6 +72,10 @@ const sendBtnDisableAtom = atom((get) => {
     }
 })
 
+function openInExtBrowser() {
+    
+}
+
 
 export default function () {
     const [method, setMethod] = useAtom(methodAtom)
@@ -85,12 +90,7 @@ export default function () {
     async function sendCommand() {
         setRes("")
         setBusy(true)
-        const ip = z.string().ip({ version: 'v4' })
-
-        let url = urlOrIp;
-        if (ip.safeParse(urlOrIp).success) {
-            url = `http://${urlOrIp}:8000`
-        }
+        let url = buildUrl(urlOrIp, false);
 
         try {
             let resp = await fetch(url, {
@@ -110,6 +110,12 @@ export default function () {
 
     function switchLanguages() {
         i18next.changeLanguage(i18next.resolvedLanguage === 'zh' ? 'en' : 'zh')
+    }
+
+    async function openInBrowser() {
+        const url = buildUrl(urlOrIp, true)
+        
+        await OpenInBrowser(url, '')
     }
 
     return (
@@ -133,12 +139,20 @@ export default function () {
                 </Label>
                 <Button
                     disabled={sendButtonDisabled || busy}
-                    className="mr-auto"
+                    className=""
                     onClick={sendCommand}>
                     {busy && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}
                     {!busy && <PaperPlaneIcon className="mr-2 h-4 w-4" />}
                     {t('send-command')}
                 </Button>
+                <Button
+                    disabled={!urlOrIp}
+                    className="mr-auto"
+                    onClick={openInBrowser}>
+                    {t('open')}
+                    <ExternalLinkIcon className="ml-2 h-4 w-4" />
+                </Button>
+                
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger asChild>
@@ -180,3 +194,5 @@ export default function () {
         </div>
     )
 }
+
+
