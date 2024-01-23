@@ -139,10 +139,20 @@ export default function () {
                     {!busy && <PaperPlaneIcon className="mr-2 h-4 w-4" />}
                     {t('send-command')}
                 </Button>
-                <Button variant="ghost" className="justify-self-end" onClick={switchLanguages}>
-                    <GlobeIcon className="mr-1" />
-                    {i18next.resolvedLanguage === 'zh' ? "中": "En"}
-                </Button>
+                <TooltipProvider>
+                    <Tooltip delayDuration={0}>
+                        <TooltipTrigger asChild>
+                            <Button variant="ghost" className="justify-self-end" onClick={switchLanguages}>
+                                <GlobeIcon className="mr-1" />
+                                {i18next.resolvedLanguage === 'zh' ? "中" : "En"}
+                            </Button>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                            <p>{t('switch-language-tip')}</p>
+                        </TooltipContent>
+                    </Tooltip>
+                </TooltipProvider>
+
             </div>
             <div className="w-full flex-1  rounded  flex flex-col gap-2 ">
                 <Label className="self-start flex gap-4 items-center">

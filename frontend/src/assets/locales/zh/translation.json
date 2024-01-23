@@ -6,5 +6,6 @@
     "cmd-empty": "命令为空",
     "invalid-json": "JSON格式错误",
     "response": "设备应答",
-    "error-tip": "发送命令失败, 请重试"
+    "error-tip": "发送命令失败, 请重试",
+    "switch-language-tip": "点击切换英文/中文"
 }

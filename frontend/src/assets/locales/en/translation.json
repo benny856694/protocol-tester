@@ -6,6 +6,7 @@
     "cmd-empty": "Command is empty",
     "invalid-json": "Invalid JSON",
     "response": "Response",
-    "error-tip": "Error sending command, please retry"
+    "error-tip": "Error sending command, please retry",
+    "switch-language-tip": "Click to switch Chinese/English"
 
 }
