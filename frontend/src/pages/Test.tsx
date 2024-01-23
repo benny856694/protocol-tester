@@ -13,7 +13,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { atom, useAtom } from 'jotai'
 import { atomWithStorage } from "jotai/utils";
-import { ReloadIcon } from "@radix-ui/react-icons"
+import { PaperPlaneIcon, ReloadIcon } from "@radix-ui/react-icons"
 import { toast } from "sonner";
 import { CommandSelection } from "@/components/commandselect";
 import { isValidJSON } from "@/lib/utils";
@@ -131,6 +131,7 @@ export default function () {
                     disabled={sendButtonDisabled || busy}
                     onClick={sendCommand}>
                     {busy && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}
+                    {!busy && <PaperPlaneIcon className="mr-2 h-4 w-4" />}
                     {t('send-command')}
                 </Button>
             </div>
