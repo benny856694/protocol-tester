@@ -27,9 +27,15 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { CaretSortIcon } from "@radix-ui/react-icons"
 
-import _commands from '@/assets/commands.json'
+import _commandsZh from '@/assets/commands-zh.json'
+import _commandsEn from '@/assets/commands-en.json'
+import i18next from "i18next"
+import { useTranslation } from "react-i18next"
 
-const commands: { [index: string]: { [index: string]: object } } = _commands
+const commandsZh: { [index: string]: { [index: string]: object } } = _commandsZh
+const commandsEn: { [index: string]: { [index: string]: object } } = _commandsEn
+
+
 
 const labels = [
     "feature",
@@ -47,6 +53,8 @@ const labels = [
 export function CommandSelection({placeHolder, onSelectCmd }: {placeHolder: string, onSelectCmd?: (cmd: object) => void }) {
     const [label, setLabel] = React.useState("feature")
     const [open, setOpen] = React.useState(false)
+    const {t} = useTranslation()
+    const commands = i18next.resolvedLanguage == "zh" ? commandsZh : commandsEn
 
     return (
         <DropdownMenu open={open} onOpenChange={setOpen}>
@@ -56,7 +64,7 @@ export function CommandSelection({placeHolder, onSelectCmd }: {placeHolder: stri
                     <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-[200px]">
+            <DropdownMenuContent className="">
                 {Object.keys(commands).map(k => (
                     <DropdownMenuSub >
                         <DropdownMenuSubTrigger>
