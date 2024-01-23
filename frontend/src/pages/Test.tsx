@@ -43,9 +43,9 @@ const jsonValidateMsgAtom = atom((get) => {
         return ''
     } else {
         if (!json) {
-            return "命令为空"
+            return "cmd-empty"
         } else {
-            return isValidJSON(json) ? "" : "JSON格式错误"
+            return isValidJSON(json) ? "" : "invalid-json"
         }
     }
 })
@@ -101,7 +101,7 @@ export default function () {
             let res = await resp.json()
             setRes(JSON.stringify(res, null, 2))
         } catch (error) {
-            toast("发生错误，请重试")
+            toast(t("error-tip"))
         } finally {
             setBusy(false)
         }
@@ -119,10 +119,10 @@ export default function () {
                                 <Input className="inline-block flex-1 w-96"
                                     value={urlOrIp}
                                     onInput={v => setUrl(v.currentTarget.value)}
-                                    placeholder="Url或IP" />
+                                    placeholder={t('url-input-placeholder')} />
                             </TooltipTrigger>
                             <TooltipContent>
-                                <p>输入IP地址, 或者Url(如: http://192.168.0.167:8000)</p>
+                                <p>{t('url-input-tip')}</p>
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
@@ -131,7 +131,7 @@ export default function () {
                     disabled={sendButtonDisabled || busy}
                     onClick={sendCommand}>
                     {busy && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}
-                    发送命令
+                    {t('send-command')}
                 </Button>
             </div>
             <div className="w-full flex-1  rounded  flex flex-col gap-2 ">
@@ -144,16 +144,16 @@ export default function () {
 
                 <Textarea className="flex-1"
                     disabled={method == 'get'}
-                    aria-errormessage={jsonValidateMsg}
+                    //aria-errormessage={jsonValidateMsg}
                     value={cmd}
                     onInput={v => { setCmd(v.currentTarget.value) }}>
                 </Textarea>
-                {jsonValidateMsg && <Label className="text-red-600 text-sm self-start">{jsonValidateMsg}</Label>}
+                {jsonValidateMsg && <Label className="text-red-600 text-sm self-start">{t(jsonValidateMsg)}</Label>}
 
             </div>
             <div className="w-full flex-1 rounded  flex flex-col gap-2 ">
                 <Label className="flex-1 h-full flex flex-col gap-2">
-                    设备应答
+                    {t('response')}
                     <Textarea className="flex-1" defaultValue={res} readOnly></Textarea>
                 </Label>
             </div>

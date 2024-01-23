@@ -1,3 +1,10 @@
 {
-    "select-command": "选择命令"
+    "select-command": "选择命令",
+    "url-input-tip": "IP或者Url (如:http://192.168.0.167:8000)",
+    "url-input-placeholder": "IP或者Url",
+    "send-command": "发送",
+    "cmd-empty": "命令为空",
+    "invalid-json": "JSON格式错误",
+    "response": "设备应答",
+    "error-tip": "发送命令失败, 请重试"
 }

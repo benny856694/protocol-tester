@@ -68,7 +68,7 @@ func main() {
 
 	// Create application with options
 	err := wails.Run(&options.App{
-		Title:             "协议测试",
+		Title:             "ProtocolTester",
 
 		DisableResize:     false,
 		Fullscreen:        false,
