@@ -13,12 +13,13 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { atom, useAtom } from 'jotai'
 import { atomWithStorage } from "jotai/utils";
-import { ExternalLinkIcon, GlobeIcon, PaperPlaneIcon, ReloadIcon } from "@radix-ui/react-icons"
+import { ExternalLinkIcon, GlobeIcon, PaperPlaneIcon, ReloadIcon, TrashIcon } from "@radix-ui/react-icons"
 import { toast } from "sonner";
 import { CommandSelection } from "@/components/commandselect";
 import { buildUrl, isValidJSON } from "@/lib/utils";
 import { z } from "zod";
 import { useTranslation, Trans } from 'react-i18next';
+import { JsonViewer } from '@textea/json-viewer'
 import { OpenInBrowser } from "../../wailsjs/go/main/App";
 import i18next from "i18next";
 
@@ -35,7 +36,7 @@ const readWriteJsonCommandAtom = atom(
     (get) => get(jsonCommandAtom),
     (_, set, newValue: string) => {
         set(jsonCommandAtom, newValue)
-        set(resAtom, '')
+        set(resAtom, null)
     })
 const jsonValidateMsgAtom = atom((get) => {
     const json = get(jsonCommandAtom)
@@ -59,7 +60,7 @@ const selectedCommandAtom = atom((get) => {
     return JSON.parse(json).cmd ?? ""
 })
 const deviceUrlAtom = atomWithStorage(deviceIp, '')
-const resAtom = atom('')
+const resAtom = atom(null)
 const sendBtnDisableAtom = atom((get) => {
     const method = get(methodAtom);
     const url = get(deviceUrlAtom);
@@ -73,7 +74,7 @@ const sendBtnDisableAtom = atom((get) => {
 })
 
 function openInExtBrowser() {
-    
+
 }
 
 
@@ -88,7 +89,7 @@ export default function () {
     const [selCommand] = useAtom(selectedCommandAtom)
     const { t } = useTranslation()
     async function sendCommand() {
-        setRes("")
+        setRes(null)
         setBusy(true)
         let url = buildUrl(urlOrIp, false);
 
@@ -99,7 +100,7 @@ export default function () {
             })
             await new Promise(resolve => setTimeout(resolve, 250));
             let res = await resp.json()
-            setRes(JSON.stringify(res, null, 2))
+            setRes(res)
         } catch (error) {
             toast(t("error-tip"))
         } finally {
@@ -114,13 +115,13 @@ export default function () {
 
     async function openInBrowser() {
         const url = buildUrl(urlOrIp, true)
-        
-        await OpenInBrowser(url,[])
+
+        await OpenInBrowser(url, [])
     }
 
     return (
-        <div className="flex flex-col h-full w-full p-2 gap-4">
-            <div className="mb-2 flex flex-row items-center gap-x-4">
+        <div className="flex flex-col h-screen p-2 gap-4">
+            <div className="flex flex-row items-center gap-x-4">
                 <MethodCombobox items={items} selectedValue={method} onSelect={(v) => setMethod(v as 'get' | 'post')} />
                 <Label className="flex items-center gap-2 ">URL:
                     <TooltipProvider>
@@ -152,7 +153,7 @@ export default function () {
                     {t('open')}
                     <ExternalLinkIcon className="ml-2 h-4 w-4" />
                 </Button>
-                
+
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger asChild>
@@ -168,7 +169,7 @@ export default function () {
                 </TooltipProvider>
 
             </div>
-            <div className="w-full flex-1  rounded  flex flex-col gap-2 ">
+            <div className="flex-1 flex flex-col gap-2 overflow-y-auto">
                 <Label className="self-start flex gap-4 items-center">
                     <CommandSelection placeHolder={t('select-command')} onSelectCmd={cmd => {
                         setCmd(JSON.stringify(cmd, null, 2))
@@ -185,12 +186,21 @@ export default function () {
                 {jsonValidateMsg && <Label className="text-red-600 text-sm self-start">{t(jsonValidateMsg)}</Label>}
 
             </div>
-            <div className="w-full flex-1 rounded  flex flex-col gap-2 ">
-                <Label className="flex-1 h-full flex flex-col gap-2">
-                    {t('response')}
-                    <Textarea className="flex-1" defaultValue={res} readOnly></Textarea>
-                </Label>
-            </div>
+            {
+                res &&
+                <div className="flex-1 flex flex-col gap-2 overflow-y-auto relative">
+                    <div className="flex justify-start gap-2 sticky top-0 bg-background">
+                        <Label> {t('response')}</Label>
+                        <Button variant="ghost" className="h-4 w-4 p-0" onClick={() => setRes(null)}>
+                            <TrashIcon />
+                        </Button>
+                    </div>
+                    <div className="flex-1">
+                        <JsonViewer theme="dark" value={res} />
+                    </div>
+                </div>
+            }
+
         </div>
     )
 }

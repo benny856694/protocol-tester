@@ -456,11 +456,10 @@
       "cmd": "request records",
       "page_no": 1,
       "page_size": 20,
-      "face_image_flag": 1,
+      "face_image_flag": 0,
       "reg_image_flag": 0,
       "upload_state": 0,
-      "fuzzy_flag": 1,
-      "name": "John Doe"
+      "fuzzy_flag": 1
     }
   },
   "Time Management": {
@@ -512,8 +511,7 @@
       "device_no": "",
       "device_sn": "0123E4-FB5BFC-9186EE",
       "ip": "192.168.0.150",
-      "version": "0.42",
-      "command_id": ""
+      "version": "0.42"
     },
     "add snap records": {
       "records": [
