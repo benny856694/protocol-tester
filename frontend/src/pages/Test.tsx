@@ -13,7 +13,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { atom, useAtom } from 'jotai'
 import { atomWithStorage } from "jotai/utils";
-import { PaperPlaneIcon, ReloadIcon } from "@radix-ui/react-icons"
+import { GlobeIcon, PaperPlaneIcon, ReloadIcon } from "@radix-ui/react-icons"
 import { toast } from "sonner";
 import { CommandSelection } from "@/components/commandselect";
 import { isValidJSON } from "@/lib/utils";
@@ -108,9 +108,13 @@ export default function () {
 
     }
 
+    function switchLanguages() {
+        i18next.changeLanguage(i18next.resolvedLanguage === 'zh' ? 'en' : 'zh')
+    }
+
     return (
         <div className="flex flex-col h-full w-full p-2 gap-4">
-            <div className="  mb-2 flex flex-row items-center gap-x-4">
+            <div className="mb-2 flex flex-row items-center gap-x-4">
                 <MethodCombobox items={items} selectedValue={method} onSelect={(v) => setMethod(v as 'get' | 'post')} />
                 <Label className="flex items-center gap-2 ">URL:
                     <TooltipProvider>
@@ -129,10 +133,15 @@ export default function () {
                 </Label>
                 <Button
                     disabled={sendButtonDisabled || busy}
+                    className="mr-auto"
                     onClick={sendCommand}>
                     {busy && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}
                     {!busy && <PaperPlaneIcon className="mr-2 h-4 w-4" />}
                     {t('send-command')}
+                </Button>
+                <Button variant="ghost" className="justify-self-end" onClick={switchLanguages}>
+                    <GlobeIcon className="mr-1" />
+                    {i18next.resolvedLanguage === 'zh' ? "中": "En"}
                 </Button>
             </div>
             <div className="w-full flex-1  rounded  flex flex-col gap-2 ">
