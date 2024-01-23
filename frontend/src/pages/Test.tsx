@@ -140,7 +140,7 @@ export default function () {
                     {t('send-command')}
                 </Button>
                 <TooltipProvider>
-                    <Tooltip delayDuration={0}>
+                    <Tooltip>
                         <TooltipTrigger asChild>
                             <Button variant="ghost" className="justify-self-end" onClick={switchLanguages}>
                                 <GlobeIcon className="mr-1" />
