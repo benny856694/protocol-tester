@@ -166,7 +166,7 @@ export default function () {
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <Button variant="ghost" className="justify-self-end" onClick={switchLanguages}>
+                            <Button variant="link" size="icon" className="justify-self-end" onClick={switchLanguages}>
                                 <GlobeIcon className="mr-1" />
                                 {i18next.resolvedLanguage === 'zh' ? "中" : "En"}
                             </Button>
@@ -198,9 +198,9 @@ export default function () {
             {
                 res &&
                 <div className="flex-1 flex flex-col overflow-y-auto">
-                    <div className="flex justify-start items-center gap-2  pb-2">
+                    <div className="flex  items-center pb-2">
                         <Label> {t('response')}</Label>
-                        <Button variant="ghost" className="h-auto p-0 rounded-none text-sm" onClick={copyToClipboard}>
+                        <Button variant="link" size="icon" className="h-auto" onClick={copyToClipboard}>
                             <ClipboardCopyIcon />
                         </Button>
                     </div>
