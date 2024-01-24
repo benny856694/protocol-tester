@@ -66,7 +66,7 @@ export function CommandSelection({placeHolder, onSelectCmd }: {placeHolder: stri
             </DropdownMenuTrigger>
             <DropdownMenuContent className="">
                 {Object.keys(commands).map(k => (
-                    <DropdownMenuSub >
+                    <DropdownMenuSub key={k} >
                         <DropdownMenuSubTrigger>
                             {k}
                         </DropdownMenuSubTrigger>
