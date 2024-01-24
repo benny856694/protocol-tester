@@ -8,6 +8,7 @@
     "response": "Response",
     "error-tip": "Error sending command, please retry",
     "switch-language-tip": "Click to switch Chinese/English",
-    "open": "Open"
+    "open": "Open",
+    "copySucceed": "Data copied to clipboard"
 
 }

@@ -13,15 +13,17 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { atom, useAtom } from 'jotai'
 import { atomWithStorage } from "jotai/utils";
-import { ExternalLinkIcon, GlobeIcon, PaperPlaneIcon, ReloadIcon, TrashIcon } from "@radix-ui/react-icons"
+import { ClipboardCopyIcon, CopyIcon, ExternalLinkIcon, GlobeIcon, PaperPlaneIcon, ReloadIcon, TrashIcon } from "@radix-ui/react-icons"
 import { toast } from "sonner";
 import { CommandSelection } from "@/components/commandselect";
 import { buildUrl, isValidJSON } from "@/lib/utils";
-import { z } from "zod";
+import { object, z } from "zod";
 import { useTranslation, Trans } from 'react-i18next';
-import { JsonViewer } from '@textea/json-viewer'
+import { JsonView, allExpanded, darkStyles, defaultStyles } from 'react-json-view-lite';
+import 'react-json-view-lite/dist/index.css';
 import { OpenInBrowser } from "../../wailsjs/go/main/App";
 import i18next from "i18next";
+import { StyleProps } from "react-json-view-lite/dist/DataRenderer";
 
 let items: ComboboxItem[] = [
     { value: "get", label: "GET" },
@@ -73,6 +75,8 @@ const sendBtnDisableAtom = atom((get) => {
     }
 })
 
+const mystyle: StyleProps = Object.assign({}, darkStyles, { container: "" })
+
 function openInExtBrowser() {
 
 }
@@ -117,6 +121,11 @@ export default function () {
         const url = buildUrl(urlOrIp, true)
 
         await OpenInBrowser(url, [])
+    }
+
+    async function copyToClipboard() {
+       await navigator.clipboard.writeText(JSON.stringify(res, null, 2))
+       toast.success(t('copySucceed'))
     }
 
     return (
@@ -188,16 +197,17 @@ export default function () {
             </div>
             {
                 res &&
-                <div className="flex-1 flex flex-col gap-2 overflow-y-auto relative">
-                    <div className="flex justify-start items-center gap-2 sticky top-0 bg-background">
+                <div className="flex-1 flex flex-col overflow-y-auto">
+                    <div className="flex justify-start items-center gap-2  pb-2">
                         <Label> {t('response')}</Label>
-                        <Button variant="ghost" className="h-4 w-4 p-0" onClick={() => setRes(null)}>
-                            <TrashIcon />
+                        <Button variant="ghost" className="h-auto p-0 rounded-none text-sm" onClick={copyToClipboard}>
+                            <ClipboardCopyIcon />
                         </Button>
                     </div>
-                    
-                        <JsonViewer className="flex-1" theme="dark" value={res} />
-                   
+                    <div className="border rounded overflow-y-auto">
+                        <JsonView data={res} style={mystyle} />
+                    </div>
+
                 </div>
             }
 
