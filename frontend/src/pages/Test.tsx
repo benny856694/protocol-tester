@@ -192,7 +192,7 @@ export default function () {
                     value={cmd}
                     onInput={v => { setCmd(v.currentTarget.value) }}>
                 </Textarea>
-                {jsonValidateMsg && <Label className="text-red-600 text-sm self-start">{t(jsonValidateMsg)}</Label>}
+                {jsonValidateMsg && <p className="text-red-600 text-sm self-start">{t(jsonValidateMsg)}</p>}
 
             </div>
             {
