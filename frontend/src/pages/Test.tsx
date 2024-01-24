@@ -204,7 +204,7 @@ export default function () {
                             <ClipboardCopyIcon />
                         </Button>
                     </div>
-                    <div className="border rounded overflow-y-auto">
+                    <div className="border rounded overflow-y-auto flex-1">
                         <JsonView data={res} style={mystyle} />
                     </div>
 
