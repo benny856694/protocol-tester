@@ -166,7 +166,7 @@ export default function () {
                 <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger asChild>
-                            <Button variant="link" size="icon" className="justify-self-end" onClick={switchLanguages}>
+                            <Button variant="link" size="icon" className="justify-self-end hover:no-underline" onClick={switchLanguages}>
                                 <GlobeIcon className="mr-1" />
                                 {i18next.resolvedLanguage === 'zh' ? "中" : "En"}
                             </Button>
