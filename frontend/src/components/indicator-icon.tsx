@@ -22,6 +22,6 @@ export default function Indicator(props: IndicatorProps) {
         }
     }
 
-    return showIndicator ? (<div onClick={onClick}>{props.indicator}</div>) : (<div onClick={onClick}>{props.normal}</div>)
+    return showIndicator ? (<div>{props.indicator}</div>) : (<div onClick={onClick}>{props.normal}</div>)
 
 }
