@@ -182,7 +182,7 @@ export default function () {
 
             </div>
             <div className="flex-1 flex flex-col gap-2">
-                <Label className="self-start flex gap-4 items-center">
+                <Label className="self-start flex gap-4 items-center capitalize">
                     <CommandSelection placeHolder={t('select-command')} onSelectCmd={cmd => {
                         setCmd(JSON.stringify(cmd, null, 2))
                     }} />
