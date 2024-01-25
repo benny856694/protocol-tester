@@ -181,39 +181,34 @@ export default function () {
                 </TooltipProvider>
 
             </div>
-            <div className="flex-1 flex flex-col gap-2">
-                <Label className="self-start flex gap-4 items-center capitalize">
+            <div className="flex-1 grid grid-cols-2 grid-rows-test-layout gap-2">
+                <Label className="flex gap-4 items-center capitalize">
                     <CommandSelection placeHolder={t('select-command')} onSelectCmd={cmd => {
                         setCmd(JSON.stringify(cmd, null, 2))
                     }} />
                     {selCommand}
                 </Label>
-
-                <Textarea className="flex-1"
-                    disabled={method == 'get'}
-                    //aria-errormessage={jsonValidateMsg}
-                    value={cmd}
-                    onInput={v => { setCmd(v.currentTarget.value) }}>
-                </Textarea>
-                {jsonValidateMsg && <p className="text-red-600 text-sm self-start">{t(jsonValidateMsg)}</p>}
-
-            </div>
-            {
-                res &&
-                <div className="flex-1 flex flex-col overflow-y-auto">
-                    <div className="flex  items-center pb-2">
-                        <Label> {t('response')}</Label>
-                        <Button variant="link" size="icon" className="h-auto">
-                            <Indicator normal={<CopyIcon />} indicator={<CheckIcon />} delay={1000} onClick={copyToClipboard} />
-                        </Button>
-                    </div>
-                    <ScrollArea className="border rounded flex-1">
-                        <JsonView data={res} style={mystyle} />
-                    </ScrollArea>
-
+                <div className="flex items-center">
+                    <Label> {t('response')}</Label>
+                    <Button variant="link" size="icon" className="h-auto">
+                        <Indicator normal={<CopyIcon />} indicator={<CheckIcon />} delay={1000} onClick={copyToClipboard} />
+                    </Button>
                 </div>
-            }
-
+                <div className="flex flex-col gap-2">
+                    <Textarea className="flex-1 resize-none"
+                        disabled={method == 'get'}
+                        //aria-errormessage={jsonValidateMsg}
+                        value={cmd}
+                        onInput={v => { setCmd(v.currentTarget.value) }}>
+                    </Textarea>
+                    {jsonValidateMsg && <p className="text-red-600 text-sm self-start">{t(jsonValidateMsg)}</p>}
+                </div>
+                <div className="flex flex-col overflow-y-auto">
+                    <ScrollArea className="border rounded flex-1">
+                        {res && <JsonView data={res} style={mystyle} />}
+                    </ScrollArea>
+                </div>
+            </div>
         </div>
     )
 }

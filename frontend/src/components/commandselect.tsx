@@ -59,7 +59,7 @@ export function CommandSelection({placeHolder, onSelectCmd }: {placeHolder: stri
     return (
         <DropdownMenu open={open} onOpenChange={setOpen}>
             <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="sm">
+                <Button variant="outline" size="sm" className="">
                     {placeHolder}
                     <CaretSortIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                 </Button>
