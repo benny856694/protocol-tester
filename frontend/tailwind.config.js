@@ -72,7 +72,7 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       gridTemplateRows: {
-        'test-layout': 'auto 1fr'
+        'test-layout': 'auto minmax(0, 1fr)'
       }
     },
   },

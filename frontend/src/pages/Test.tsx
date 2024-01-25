@@ -181,7 +181,7 @@ export default function () {
                 </TooltipProvider>
 
             </div>
-            <div className="flex-1 grid grid-cols-2 grid-rows-test-layout gap-2">
+            <div className="flex-1 grid grid-cols-2 grid-rows-test-layout gap-2 overflow-y-auto">
                 <Label className="flex gap-4 items-center capitalize">
                     <CommandSelection placeHolder={t('select-command')} onSelectCmd={cmd => {
                         setCmd(JSON.stringify(cmd, null, 2))
@@ -203,11 +203,9 @@ export default function () {
                     </Textarea>
                     {jsonValidateMsg && <p className="text-red-600 text-sm self-start">{t(jsonValidateMsg)}</p>}
                 </div>
-                <div className="flex flex-col overflow-y-auto">
-                    <ScrollArea className="border rounded flex-1">
+                    <ScrollArea className="border rounded">
                         {res && <JsonView data={res} style={mystyle} />}
                     </ScrollArea>
-                </div>
             </div>
         </div>
     )
