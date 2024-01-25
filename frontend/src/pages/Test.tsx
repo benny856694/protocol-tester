@@ -207,7 +207,7 @@ export default function () {
                             <Indicator normal={<CopyIcon />} indicator={<CheckIcon />} delay={1000} onClick={copyToClipboard} />
                         </Button>
                     </div>
-                    <ScrollArea className="border rounded overflow-y-auto flex-1">
+                    <ScrollArea className="border rounded flex-1">
                         <JsonView data={res} style={mystyle} />
                     </ScrollArea>
 
