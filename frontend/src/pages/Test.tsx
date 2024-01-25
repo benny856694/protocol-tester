@@ -203,7 +203,7 @@ export default function () {
                     <div className="flex  items-center pb-2">
                         <Label> {t('response')}</Label>
                         <Button variant="link" size="icon" className="h-auto">
-                            <Indicator normal={<ClipboardCopyIcon />} indicator={<CheckIcon />} delay={1000} onClick={copyToClipboard} />
+                            <Indicator normal={<CopyIcon />} indicator={<CheckIcon />} delay={1000} onClick={copyToClipboard} />
                         </Button>
                     </div>
                     <div className="border rounded overflow-y-auto flex-1">
