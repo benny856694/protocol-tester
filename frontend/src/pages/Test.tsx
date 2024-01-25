@@ -194,14 +194,14 @@ export default function () {
                         <Indicator normal={<CopyIcon />} indicator={<CheckIcon />} delay={1000} onClick={copyToClipboard} />
                     </Button>
                 </div>
-                <div className="flex flex-col gap-2">
+                <div className="flex flex-col gap-2 relative">
                     <Textarea className="flex-1 resize-none"
                         disabled={method == 'get'}
                         //aria-errormessage={jsonValidateMsg}
                         value={cmd}
                         onInput={v => { setCmd(v.currentTarget.value) }}>
                     </Textarea>
-                    {jsonValidateMsg && <p className="text-red-600 text-sm self-start">{t(jsonValidateMsg)}</p>}
+                    {jsonValidateMsg && <p className="text-red-600 text-sm absolute left-2 bottom-2">{t(jsonValidateMsg)}</p>}
                 </div>
                     <ScrollArea className="border rounded">
                         {res && <JsonView data={res} style={mystyle} />}
