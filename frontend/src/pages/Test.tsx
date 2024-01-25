@@ -16,7 +16,7 @@ import { atomWithStorage } from "jotai/utils";
 import { ClipboardCopyIcon, CopyIcon, ExternalLinkIcon, GlobeIcon, PaperPlaneIcon, ReloadIcon, TrashIcon } from "@radix-ui/react-icons"
 import { toast } from "sonner";
 import { CommandSelection } from "@/components/commandselect";
-import { buildUrl, isValidJSON } from "@/lib/utils";
+import { buildUrl, cn, isValidJSON } from "@/lib/utils";
 import { object, z } from "zod";
 import { useTranslation, Trans } from 'react-i18next';
 import { JsonView, allExpanded, darkStyles, defaultStyles } from 'react-json-view-lite';
@@ -75,7 +75,7 @@ const sendBtnDisableAtom = atom((get) => {
     }
 })
 
-const mystyle: StyleProps = Object.assign({}, darkStyles, { container: "" })
+const mystyle: StyleProps = { ...darkStyles, container: "" }
 
 function openInExtBrowser() {
 
@@ -124,8 +124,8 @@ export default function () {
     }
 
     async function copyToClipboard() {
-       await navigator.clipboard.writeText(JSON.stringify(res, null, 2))
-       toast.success(t('copySucceed'))
+        await navigator.clipboard.writeText(JSON.stringify(res, null, 2))
+        toast.success(t('copySucceed'))
     }
 
     return (
@@ -151,8 +151,9 @@ export default function () {
                     disabled={sendButtonDisabled || busy}
                     className=""
                     onClick={sendCommand}>
-                    {busy && <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />}
-                    {!busy && <PaperPlaneIcon className="mr-2 h-4 w-4" />}
+                    {busy ?
+                        <ReloadIcon className={cn("mr-2 h-4 w-4", { "animate-spin": busy })} /> :
+                        <PaperPlaneIcon className={cn("mr-2 h-4 w-4", { "animate-spin": busy })} />}
                     {t('send-command')}
                 </Button>
                 <Button
