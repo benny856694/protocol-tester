@@ -13,7 +13,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { atom, useAtom } from 'jotai'
 import { atomWithStorage } from "jotai/utils";
-import { ClipboardCopyIcon, CopyIcon, ExternalLinkIcon, GlobeIcon, PaperPlaneIcon, ReloadIcon, TrashIcon } from "@radix-ui/react-icons"
+import { CheckIcon, ClipboardCopyIcon, CopyIcon, ExternalLinkIcon, GlobeIcon, PaperPlaneIcon, ReloadIcon, TrashIcon } from "@radix-ui/react-icons"
 import { toast } from "sonner";
 import { CommandSelection } from "@/components/commandselect";
 import { buildUrl, cn, isValidJSON } from "@/lib/utils";
@@ -24,6 +24,7 @@ import 'react-json-view-lite/dist/index.css';
 import { OpenInBrowser } from "../../wailsjs/go/main/App";
 import i18next from "i18next";
 import { StyleProps } from "react-json-view-lite/dist/DataRenderer";
+import Indicator from "@/components/indicator-icon";
 
 let items: ComboboxItem[] = [
     { value: "get", label: "GET" },
@@ -125,7 +126,7 @@ export default function () {
 
     async function copyToClipboard() {
         await navigator.clipboard.writeText(JSON.stringify(res, null, 2))
-        toast.success(t('copySucceed'))
+        //toast.success(t('copySucceed'))
     }
 
     return (
@@ -201,8 +202,8 @@ export default function () {
                 <div className="flex-1 flex flex-col overflow-y-auto">
                     <div className="flex  items-center pb-2">
                         <Label> {t('response')}</Label>
-                        <Button variant="link" size="icon" className="h-auto" onClick={copyToClipboard}>
-                            <ClipboardCopyIcon />
+                        <Button variant="link" size="icon" className="h-auto">
+                            <Indicator normal={<ClipboardCopyIcon />} indicator={<CheckIcon />} delay={1000} onClick={copyToClipboard} />
                         </Button>
                     </div>
                     <div className="border rounded overflow-y-auto flex-1">
