@@ -195,7 +195,7 @@ export default function () {
                     </Button>
                 </div>
                 <div className="flex flex-col gap-2 relative">
-                    <Textarea className="flex-1 resize-none"
+                    <Textarea className="flex-1 resize-none focus-visible:ring-0"
                         disabled={method == 'get'}
                         //aria-errormessage={jsonValidateMsg}
                         value={cmd}
