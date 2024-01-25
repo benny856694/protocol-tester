@@ -201,7 +201,7 @@ export default function () {
                         value={cmd}
                         onInput={v => { setCmd(v.currentTarget.value) }}>
                     </Textarea>
-                    {jsonValidateMsg && <p className="text-red-600 text-sm absolute left-px rounded-bl bottom-0 px-1 bg-background">{t(jsonValidateMsg)}</p>}
+                    {jsonValidateMsg && <p className="text-red-600 text-sm absolute left-px rounded-bl bottom-px px-1 bg-background">{t(jsonValidateMsg)}</p>}
                 </div>
                     <ScrollArea className="border rounded">
                         {res && <JsonView data={res} style={mystyle} />}
