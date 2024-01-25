@@ -25,6 +25,7 @@ import { OpenInBrowser } from "../../wailsjs/go/main/App";
 import i18next from "i18next";
 import { StyleProps } from "react-json-view-lite/dist/DataRenderer";
 import Indicator from "@/components/indicator-icon";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 let items: ComboboxItem[] = [
     { value: "get", label: "GET" },
@@ -206,9 +207,9 @@ export default function () {
                             <Indicator normal={<CopyIcon />} indicator={<CheckIcon />} delay={1000} onClick={copyToClipboard} />
                         </Button>
                     </div>
-                    <div className="border rounded overflow-y-auto flex-1">
+                    <ScrollArea className="border rounded overflow-y-auto flex-1">
                         <JsonView data={res} style={mystyle} />
-                    </div>
+                    </ScrollArea>
 
                 </div>
             }
