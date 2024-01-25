@@ -31,9 +31,11 @@ export default function () {
             let ports = data as PortDetails[]
             setSerialPorts(ports.map(item => ({ value: item.Name.toLowerCase(), label: item.Name })))
         })
-    })
+    }, [])
 
-    React.useEffect(() => EventsOn('capture-record', (data) => setCaptureRecords([data, ...captureRecords])))
+    React.useEffect(function () {
+        return EventsOn('capture-record', (data) => setCaptureRecords([data, ...captureRecords]));
+    }, [])
 
     return (
         <div className="h-100% place-items-center mx-auto ">
