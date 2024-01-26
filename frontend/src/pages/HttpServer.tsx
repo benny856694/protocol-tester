@@ -19,7 +19,7 @@ import { atom, useAtom } from 'jotai';
 
 const recordsAtomConfig = atom<CaptureRecord[]>([])
 
-export default function HttpServer() {
+export default function HttpServer({onNewRecord}: {onNewRecord?: (r: CaptureRecord)=>void}) {
     const [records, setRecords] = useAtom(recordsAtomConfig)
     const [currentRecord, setCurrentRecord] = React.useState<CaptureRecord>()
 
@@ -28,12 +28,15 @@ export default function HttpServer() {
     }
 
     React.useEffect(() => {
-        return EventsOn('capture-record', r => setCurrentRecord(r));
+        return EventsOn('capture-record', r => {
+             setCurrentRecord(r);
+        });
     }, []);
 
     React.useEffect(() => {
         if (currentRecord) {
             addRecord(currentRecord)
+            onNewRecord?.(currentRecord)
         }
     }, [currentRecord])
 
@@ -41,7 +44,7 @@ export default function HttpServer() {
         <div className='border h-full rounded overflow-y-auto'>
             <ScrollArea>
                 <Table>
-                    <TableCaption>A list of your recent invoices.</TableCaption>
+                    {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
                     <TableHeader>
                         <TableRow>
                             <TableHead className="">Time</TableHead>
@@ -52,7 +55,7 @@ export default function HttpServer() {
                     </TableHeader>
                     <TableBody>
                         {records.map((r) => (
-                            <TableRow key={r.sequence_no}>
+                            <TableRow key={r.sequence_no+r.device_sn}>
                                 <TableCell className="font-medium">{r.cap_time}</TableCell>
                                 <TableCell>{r.match?.person_name}</TableCell>
                                 <TableCell>{r.sequence_no}</TableCell>
@@ -68,7 +71,6 @@ export default function HttpServer() {
                     </TableFooter>
                 </Table>
             </ScrollArea>
-
         </div>
     )
 }
