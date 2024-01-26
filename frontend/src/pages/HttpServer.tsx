@@ -25,7 +25,7 @@ export default function HttpServer() {
                 <TableCaption>A list of your recent invoices.</TableCaption>
                 <TableHeader>
                     <TableRow>
-                        <TableHead className="w-[100px]">Time</TableHead>
+                        <TableHead className="">Time</TableHead>
                         <TableHead>Name</TableHead>
                         <TableHead>Sequence</TableHead>
                         <TableHead className="text-right">Device SN</TableHead>
@@ -44,7 +44,7 @@ export default function HttpServer() {
                 <TableFooter>
                     <TableRow>
                         <TableCell colSpan={3}>Total</TableCell>
-                        <TableCell className="text-right">0</TableCell>
+                        <TableCell className="text-right">{records.length}</TableCell>
                     </TableRow>
                 </TableFooter>
             </Table>
