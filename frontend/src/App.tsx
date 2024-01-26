@@ -18,7 +18,7 @@ function App() {
 }
   return (
     <BrowserRouter>
-      <div className="h-screen flex flex-col overflow-y-auto p-2">
+      <div className="h-screen flex flex-col  p-2">
         <div className="flex justify-center items-center gap-2 pb-2">
           <NavLink to="/" className={({isActive})=>cn("px-4 py-1 rounded", {"bg-secondary": isActive})}>{t('protocolTester')}</NavLink>
           <NavLink to="/httpsvr" className={({isActive})=>cn("px-4 py-1 rounded", {"bg-secondary": isActive})}>{t('httpServer')}</NavLink>
@@ -36,7 +36,7 @@ function App() {
                     </Tooltip>
                 </TooltipProvider>
         </div>
-        <div className="flex-1">
+        <div className="flex-1 overflow-y-auto">
           <Routes>
             <Route path="/" element={<Test />} />
             <Route path="/httpsvr" element={<HttpServer />} />
