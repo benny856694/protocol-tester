@@ -14,7 +14,7 @@ export interface CaptureRecord {
     device_no:          string;
     device_sn:          string;
     is_realtime:        number;
-    match:              Match;
+    match?:              Match;
     match_failed_reson: number;
     match_result:       number;
     overall_pic_flag:   boolean;

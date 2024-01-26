@@ -12,13 +12,28 @@ import {
 
 import { CaptureRecord, Convert } from "../models/capture-record";
 import { EventsOn } from '../../wailsjs/runtime/runtime';
+import { Button } from '@/components/ui/button';
 
 
 export default function HttpServer() {
     const [records, setRecords] = React.useState<CaptureRecord[]>([])
+    const [currentRecord, setCurrentRecord] = React.useState<CaptureRecord>()
+
+    function addRecord(r: CaptureRecord) {
+        console.log(records.length)
+        setRecords([r, ...records])
+    }
+
     React.useEffect(()=>{
-        return EventsOn('capture-record', (data) => setRecords([data, ...records])); 
+        return EventsOn('capture-record', r =>setCurrentRecord(r) ); 
     }, []);
+
+    React.useEffect(()=>{
+        if (currentRecord) {
+            addRecord(currentRecord)
+        }
+    }, [currentRecord])
+
     return (
         <div className='border h-full rounded'>
             <Table>
