@@ -9,5 +9,8 @@
     "error-tip": "发送命令失败, 请重试",
     "switch-language-tip": "点击切换英文/中文",
     "open": "打开",
-    "copySucceed": "数据拷贝成功"
+    "copySucceed": "数据拷贝成功",
+    "protocolTester": "协议测试",
+    "httpServer": "HTTP 服务器"
+
 }

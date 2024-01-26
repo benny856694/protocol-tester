@@ -115,9 +115,7 @@ export default function () {
 
     }
 
-    function switchLanguages() {
-        i18next.changeLanguage(i18next.resolvedLanguage === 'zh' ? 'en' : 'zh')
-    }
+ 
 
     async function openInBrowser() {
         const url = buildUrl(urlOrIp, true)
@@ -131,7 +129,7 @@ export default function () {
     }
 
     return (
-        <div className="flex flex-col h-screen p-2 gap-4">
+        <div className="flex flex-col h-full gap-4">
             <div className="flex flex-row items-center gap-x-4">
                 <MethodCombobox items={items} selectedValue={method} onSelect={(v) => setMethod(v as 'get' | 'post')} />
                 <Label className="flex items-center gap-2 ">URL:
@@ -166,19 +164,7 @@ export default function () {
                     <ExternalLinkIcon className="ml-2 h-4 w-4" />
                 </Button>
 
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <Button variant="link" size="icon" className="justify-self-end hover:no-underline" onClick={switchLanguages}>
-                                <GlobeIcon className="mr-1" />
-                                {i18next.resolvedLanguage === 'zh' ? "中" : "En"}
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p>{t('switch-language-tip')}</p>
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
+                
 
             </div>
             <div className="flex-1 grid grid-cols-2 grid-rows-test-layout gap-2 overflow-y-auto">
@@ -201,7 +187,7 @@ export default function () {
                         value={cmd}
                         onInput={v => { setCmd(v.currentTarget.value) }}>
                     </Textarea>
-                    {jsonValidateMsg && <p className="text-red-600 text-sm absolute left-px rounded-bl bottom-px px-1 bg-background">{t(jsonValidateMsg)}</p>}
+                    {jsonValidateMsg && <p className="text-red-600 text-sm absolute left-px rounded-tl top-px px-1 bg-background">{t(jsonValidateMsg)}</p>}
                 </div>
                     <ScrollArea className="border rounded">
                         {res && <JsonView data={res} style={mystyle} />}
