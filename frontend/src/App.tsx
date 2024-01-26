@@ -9,6 +9,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "./comp
 import { Button } from "./components/ui/button";
 import { GlobeIcon } from "@radix-ui/react-icons";
 import i18next from "i18next";
+import HttpServer from "./pages/HttpServer";
 
 function App() {
   const {t} = useTranslation()
@@ -20,7 +21,7 @@ function App() {
       <div className="h-screen flex flex-col overflow-y-auto p-2">
         <div className="flex justify-center items-center gap-2 pb-2">
           <NavLink to="/" className={({isActive})=>cn("px-4 py-1 rounded", {"bg-secondary": isActive})}>{t('protocolTester')}</NavLink>
-          <NavLink to="/about" className={({isActive})=>cn("px-4 py-1 rounded", {"bg-secondary": isActive})}>{t('httpServer')}</NavLink>
+          <NavLink to="/httpsvr" className={({isActive})=>cn("px-4 py-1 rounded", {"bg-secondary": isActive})}>{t('httpServer')}</NavLink>
           <TooltipProvider>
                     <Tooltip>
                         <TooltipTrigger asChild>
@@ -38,7 +39,7 @@ function App() {
         <div className="flex-1">
           <Routes>
             <Route path="/" element={<Test />} />
-            <Route path="/about" element={<About />} />
+            <Route path="/httpsvr" element={<HttpServer />} />
             <Route path="/test" element={<Test />} />
           </Routes>
         </div>
