@@ -21,7 +21,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="h-screen flex flex-col  p-2">
-        <div className="flex justify-center items-center gap-2 pb-2">
+        <div className="flex justify-center items-center gap-2 pb-4">
           <NavLink to="/" className={({isActive})=>cn("px-4 py-1 rounded", {"bg-secondary": isActive})}>{t('protocolTester')}</NavLink>
           <NavLink to="/httpsvr" className={({isActive})=>cn("px-4 py-1 rounded", {"bg-secondary": isActive})}>{t('httpServer')+(count>0?` (${count}) `:'')}</NavLink>
           <TooltipProvider>
