@@ -20,11 +20,12 @@ import JsonViewer from '@/components/json-viewer';
 
 
 const recordsAtomConfig = atom<CaptureRecord[]>([])
+const selRecordAtomConfig = atom<CaptureRecord|null>(null)
 
 export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureRecord) => void }) {
     const [records, setRecords] = useAtom(recordsAtomConfig)
     const [currentRecord, setCurrentRecord] = React.useState<CaptureRecord>()
-    const [selRecord, setSelRecord] = React.useState<CaptureRecord>()
+    const [selRecord, setSelRecord] = useAtom(selRecordAtomConfig)
 
     function addRecord(r: CaptureRecord) {
         setRecords([r, ...records])
@@ -46,7 +47,7 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
     return (
         <div className='border h-full flex flex-col rounded overflow-y-auto'>
             <div className='p-2 col-span-2'>
-                服务器监听端口8080
+                服务器上传数据URL: http://*:8080/upload/record
             </div>
             <div className='flex-1 overflow-y-auto flex flex-row gap-2'>
                 <ScrollArea className='self-start flex-[2_2_0%] h-full'>
@@ -89,7 +90,6 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
                                 {selRecord?.match?.image && <img src={selRecord?.match?.image} alt="template" width={64} height={64} />}
                             </div>
                             <ScrollArea>
-
                                 <JsonViewer data={selRecord} />
                             </ScrollArea>
                         </div>
