@@ -19,7 +19,7 @@ import { atom, useAtom } from 'jotai';
 
 const recordsAtomConfig = atom<CaptureRecord[]>([])
 
-export default function HttpServer({onNewRecord}: {onNewRecord?: (r: CaptureRecord)=>void}) {
+export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureRecord) => void }) {
     const [records, setRecords] = useAtom(recordsAtomConfig)
     const [currentRecord, setCurrentRecord] = React.useState<CaptureRecord>()
 
@@ -29,7 +29,7 @@ export default function HttpServer({onNewRecord}: {onNewRecord?: (r: CaptureReco
 
     React.useEffect(() => {
         return EventsOn('capture-record', r => {
-             setCurrentRecord(r);
+            setCurrentRecord(r);
         });
     }, []);
 
@@ -41,35 +41,37 @@ export default function HttpServer({onNewRecord}: {onNewRecord?: (r: CaptureReco
     }, [currentRecord])
 
     return (
-        <div className='border h-full rounded overflow-y-auto'>
-            <ScrollArea>
-                <Table>
+        <div className='border h-full flex flex-col rounded overflow-y-auto'>
+            <ScrollArea className=''>
+                {records.length > 0 && <Table className='relative'>
                     {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
-                    <TableHeader>
-                        <TableRow>
+                    <TableHeader >
+                        <TableRow className='sticky top-0'>
                             <TableHead className="">Time</TableHead>
                             <TableHead>Name</TableHead>
+                            <TableHead>ID</TableHead>
                             <TableHead>Sequence</TableHead>
-                            <TableHead className="text-right">Device SN</TableHead>
+                            <TableHead className="">Device SN</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
                         {records.map((r) => (
-                            <TableRow key={r.sequence_no+r.device_sn}>
+                            <TableRow key={r.sequence_no + r.device_sn}>
                                 <TableCell className="font-medium">{r.cap_time}</TableCell>
                                 <TableCell>{r.match?.person_name}</TableCell>
+                                <TableCell>{r.match?.person_id}</TableCell>
                                 <TableCell>{r.sequence_no}</TableCell>
-                                <TableCell className="text-right">{r.device_sn}</TableCell>
+                                <TableCell className="">{r.device_sn}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
-                    <TableFooter>
+                    {/* <TableFooter>
                         <TableRow>
                             <TableCell colSpan={3}>Total</TableCell>
                             <TableCell className="text-right">{records.length}</TableCell>
                         </TableRow>
-                    </TableFooter>
-                </Table>
+                    </TableFooter> */}
+                </Table>}
             </ScrollArea>
         </div>
     )
