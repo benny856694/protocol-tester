@@ -15,6 +15,8 @@ import { EventsOn } from '../../wailsjs/runtime/runtime';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { atom, useAtom } from 'jotai';
+import { JsonView } from 'react-json-view-lite';
+import JsonViewer from '@/components/json-viewer';
 
 
 const recordsAtomConfig = atom<CaptureRecord[]>([])
@@ -22,6 +24,7 @@ const recordsAtomConfig = atom<CaptureRecord[]>([])
 export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureRecord) => void }) {
     const [records, setRecords] = useAtom(recordsAtomConfig)
     const [currentRecord, setCurrentRecord] = React.useState<CaptureRecord>()
+    const [selRecord, setSelRecord] = React.useState<CaptureRecord>()
 
     function addRecord(r: CaptureRecord) {
         setRecords([r, ...records])
@@ -60,7 +63,7 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
                         </TableHeader>
                         <TableBody>
                             {records.map((r) => (
-                                <TableRow key={r.sequence_no + r.device_sn}>
+                                <TableRow onClick={() => setSelRecord(r)} key={r.sequence_no + r.device_sn}>
                                     <TableCell className="font-medium">{r.cap_time}</TableCell>
                                     <TableCell>{r.match?.person_name}</TableCell>
                                     <TableCell>{r.match?.person_id}</TableCell>
@@ -77,7 +80,22 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
                     </TableFooter> */}
                     </Table>}
                 </ScrollArea>
-                <div className='flex-1 h-full border w-full'></div>
+
+                {
+                    selRecord && (
+                        <div className='flex-1 flex flex-col overflow-auto'>
+                            <div className='max-h-[64px] w-full flex flex-row justify-center gap-4'>
+                                {selRecord?.closeup_pic?.data && <img src={selRecord?.closeup_pic?.data} alt="closeup" width={64} height={64} />}
+                                {selRecord?.match?.image && <img src={selRecord?.match?.image} alt="template" width={64} height={64} />}
+                            </div>
+                            <ScrollArea>
+
+                                <JsonViewer data={selRecord} />
+                            </ScrollArea>
+                        </div>
+                    )
+                }
+
             </div>
 
         </div>

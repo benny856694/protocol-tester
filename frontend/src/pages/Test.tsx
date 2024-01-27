@@ -19,13 +19,14 @@ import { CommandSelection } from "@/components/commandselect";
 import { buildUrl, cn, isValidJSON } from "@/lib/utils";
 import { object, z } from "zod";
 import { useTranslation, Trans } from 'react-i18next';
-import { JsonView, allExpanded, darkStyles, defaultStyles } from 'react-json-view-lite';
+
 import 'react-json-view-lite/dist/index.css';
 import { OpenInBrowser } from "../../wailsjs/go/main/App";
 import i18next from "i18next";
 import { StyleProps } from "react-json-view-lite/dist/DataRenderer";
 import Indicator from "@/components/indicator-icon";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import JsonViewer from "@/components/json-viewer";
 
 let items: ComboboxItem[] = [
     { value: "get", label: "GET" },
@@ -77,7 +78,6 @@ const sendBtnDisableAtom = atom((get) => {
     }
 })
 
-const mystyle: StyleProps = { ...darkStyles, container: "" }
 
 function openInExtBrowser() {
 
@@ -190,7 +190,7 @@ export default function () {
                     {jsonValidateMsg && <p className="text-red-600 text-sm absolute left-px rounded-tl top-px px-1 bg-background">{t(jsonValidateMsg)}</p>}
                 </div>
                     <ScrollArea className="border rounded">
-                        {res && <JsonView data={res} style={mystyle} />}
+                        {res && <JsonViewer data={res} />}
                     </ScrollArea>
             </div>
         </div>
