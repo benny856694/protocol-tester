@@ -45,7 +45,7 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
             <div className='p-2 col-span-2'>
                 服务器监听端口8080
             </div>
-            <div className='flex-1 overflow-y-auto flex flex-row'>
+            <div className='flex-1 overflow-y-auto flex flex-row gap-2'>
                 <ScrollArea className='self-start flex-[2_2_0%] h-full'>
                     {records.length > 0 && <Table className='relative'>
                         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
