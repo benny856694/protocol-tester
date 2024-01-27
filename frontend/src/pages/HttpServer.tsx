@@ -18,18 +18,26 @@ import { atom, useAtom } from 'jotai';
 import { JsonView } from 'react-json-view-lite';
 import JsonViewer from '@/components/json-viewer';
 import { normalizeImageData } from '@/lib/utils';
+import { ReaderIcon } from '@radix-ui/react-icons';
+import { Toggle } from '@/components/ui/toggle';
 
 
 const recordsAtomConfig = atom<CaptureRecord[]>([])
 const selRecordAtomConfig = atom<CaptureRecord | null>(null)
+const detailsVisibleAtomConfig = atom(false)
 
 export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureRecord) => void }) {
     const [records, setRecords] = useAtom(recordsAtomConfig)
     const [currentRecord, setCurrentRecord] = React.useState<CaptureRecord>()
     const [selRecord, setSelRecord] = useAtom(selRecordAtomConfig)
+    const [detailsVisible, setDetailsVisible] = useAtom(detailsVisibleAtomConfig)
 
     function addRecord(r: CaptureRecord) {
         setRecords([r, ...records])
+    }
+
+    function toggleDetailsView() {
+        setDetailsVisible(!detailsVisible)
     }
 
     React.useEffect(() => {
@@ -47,8 +55,9 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
 
     return (
         <div className='border h-full flex flex-col rounded overflow-y-auto'>
-            <div className='p-2 col-span-2'>
+            <div className='p-2 col-span-2 flex flex-row items-center'>
                 服务器上传数据URL: http://*:8080/upload/record
+                <Toggle className='ml-auto' size="sm" pressed={detailsVisible} onPressedChange={toggleDetailsView}><ReaderIcon className='h-4 w-4 p-0' /></Toggle>
             </div>
             <div className='flex-1 overflow-y-auto flex flex-row gap-2'>
                 <ScrollArea className='self-start flex-[2_2_0%] h-full'>
@@ -84,14 +93,14 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
                 </ScrollArea>
 
                 {
-                    selRecord && (
+                    (detailsVisible && selRecord) && (
                         <div className='flex-1 flex flex-col overflow-auto'>
                             <div className='max-h-[64px] w-full flex flex-row justify-center gap-4'>
                                 {selRecord?.closeup_pic?.data && <img src={normalizeImageData(selRecord?.closeup_pic?.data)} alt="closeup" width={64} height={64} />}
                                 {selRecord?.match?.image && <img src={normalizeImageData(selRecord?.match?.image)} alt="template" width={64} height={64} />}
                             </div>
                             <ScrollArea>
-                                <JsonViewer data={selRecord} />
+                                {<JsonViewer data={selRecord} />}
                             </ScrollArea>
                         </div>
                     )
