@@ -167,7 +167,7 @@ export default function () {
                 
 
             </div>
-            <div className="flex-1 grid grid-cols-2 grid-rows-test-layout gap-2 overflow-y-auto">
+            <div className="flex-1 grid grid-cols-2 grid-rows-[auto_1fr] gap-2 overflow-y-auto">
                 <Label className="flex gap-4 items-center capitalize">
                     <CommandSelection placeHolder={t('select-command')} onSelectCmd={cmd => {
                         setCmd(JSON.stringify(cmd, null, 2))
