@@ -17,10 +17,11 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { atom, useAtom } from 'jotai';
 import { JsonView } from 'react-json-view-lite';
 import JsonViewer from '@/components/json-viewer';
+import { normalizeImageData } from '@/lib/utils';
 
 
 const recordsAtomConfig = atom<CaptureRecord[]>([])
-const selRecordAtomConfig = atom<CaptureRecord|null>(null)
+const selRecordAtomConfig = atom<CaptureRecord | null>(null)
 
 export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureRecord) => void }) {
     const [records, setRecords] = useAtom(recordsAtomConfig)
@@ -86,8 +87,8 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
                     selRecord && (
                         <div className='flex-1 flex flex-col overflow-auto'>
                             <div className='max-h-[64px] w-full flex flex-row justify-center gap-4'>
-                                {selRecord?.closeup_pic?.data && <img src={selRecord?.closeup_pic?.data} alt="closeup" width={64} height={64} />}
-                                {selRecord?.match?.image && <img src={selRecord?.match?.image} alt="template" width={64} height={64} />}
+                                {selRecord?.closeup_pic?.data && <img src={normalizeImageData(selRecord?.closeup_pic?.data)} alt="closeup" width={64} height={64} />}
+                                {selRecord?.match?.image && <img src={normalizeImageData(selRecord?.match?.image)} alt="template" width={64} height={64} />}
                             </div>
                             <ScrollArea>
                                 <JsonViewer data={selRecord} />

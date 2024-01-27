@@ -25,3 +25,8 @@ export function buildUrl(urlOrIp: string, forBrowser: boolean) {
   }
   return url;
 }
+
+export function normalizeImageData(base64: string) {
+  const prefix = 'data:image/jpeg;base64,'
+  return base64.startsWith(prefix) ? base64 : prefix+base64
+}
