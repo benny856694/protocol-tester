@@ -32,7 +32,7 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
     const [currentRecord, setCurrentRecord] = React.useState<CaptureRecord>()
     const [selRecord, setSelRecord] = useAtom(selRecordAtomConfig)
     const [detailsVisible, setDetailsVisible] = useAtom(detailsVisibleAtomConfig)
-    const {t} = useTranslation()
+    const { t } = useTranslation()
 
     function addRecord(r: CaptureRecord) {
         setRecords([r, ...records])
@@ -95,7 +95,7 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
                 </ScrollArea>
 
                 {
-                    (detailsVisible) && (
+                    detailsVisible && (
                         <div className='flex-1 flex flex-col overflow-auto rounded border p-2'>
                             <div className='max-h-[64px] w-full flex flex-row justify-center gap-4'>
                                 {selRecord?.closeup_pic?.data && <img src={normalizeImageData(selRecord?.closeup_pic?.data)} alt="closeup" width={64} height={64} />}
