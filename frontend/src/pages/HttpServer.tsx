@@ -54,13 +54,13 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
     }, [currentRecord])
 
     return (
-        <div className='border h-full flex flex-col rounded overflow-y-auto'>
-            <div className='col-span-2 flex flex-row items-center bg-secondary px-2 py-1 mb-2'>
+        <div className='h-full flex flex-col overflow-y-auto'>
+            <div className='col-span-2 flex flex-row items-center border rounded px-2 py-1 mb-2'>
                 服务器上传数据URL: http://*:8080/upload/record
                 <Toggle className='ml-auto' size="sm" pressed={detailsVisible} onPressedChange={toggleDetailsView}><ReaderIcon className='h-4 w-4 p-0' /></Toggle>
             </div>
             <div className='flex-1 overflow-y-auto flex flex-row gap-2'>
-                <ScrollArea className='self-start flex-[2_2_0%] h-full'>
+                <ScrollArea className='self-start flex-[2_2_0%] h-full rounded border'>
                     {records.length > 0 && <Table className='relative'>
                         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
                         <TableHeader >
@@ -94,7 +94,7 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
 
                 {
                     (detailsVisible && selRecord) && (
-                        <div className='flex-1 flex flex-col overflow-auto'>
+                        <div className='flex-1 flex flex-col overflow-auto rounded border p-2'>
                             <div className='max-h-[64px] w-full flex flex-row justify-center gap-4'>
                                 {selRecord?.closeup_pic?.data && <img src={normalizeImageData(selRecord?.closeup_pic?.data)} alt="closeup" width={64} height={64} />}
                                 {selRecord?.match?.image && <img src={normalizeImageData(selRecord?.match?.image)} alt="template" width={64} height={64} />}
