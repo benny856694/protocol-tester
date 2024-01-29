@@ -13,7 +13,8 @@
     "protocolTester": "协议测试",
     "httpServer": "HTTP 服务器",
     "details": "详情",
-    "httpServerUrl": "数据上传Url"
+    "httpServerUrl": "数据上传Url",
+    "clickOneRowToViewDetail": "单击左侧表格中的一行数据以查看详情"
 
 
 }

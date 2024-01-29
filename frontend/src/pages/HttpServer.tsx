@@ -62,7 +62,7 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
                 <Toggle className='ml-auto' size="sm" pressed={detailsVisible} onPressedChange={toggleDetailsView}><ReaderIcon className='h-4 w-4 p-0 mr-1' />{t('details')}</Toggle>
             </div>
             <div className='flex-1 overflow-y-auto flex flex-row gap-2'>
-                <ScrollArea className='self-start flex-[2_2_0%] h-full rounded border'>
+                <ScrollArea className='self-start flex-[3_3_0%] h-full rounded border'>
                     {records.length > 0 && <Table className='relative'>
                         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
                         <TableHeader >
@@ -95,15 +95,16 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
                 </ScrollArea>
 
                 {
-                    (detailsVisible && selRecord) && (
+                    (detailsVisible) && (
                         <div className='flex-1 flex flex-col overflow-auto rounded border p-2'>
                             <div className='max-h-[64px] w-full flex flex-row justify-center gap-4'>
                                 {selRecord?.closeup_pic?.data && <img src={normalizeImageData(selRecord?.closeup_pic?.data)} alt="closeup" width={64} height={64} />}
                                 {selRecord?.match?.image && <img src={normalizeImageData(selRecord?.match?.image)} alt="template" width={64} height={64} />}
                             </div>
-                            <ScrollArea>
+                            {!selRecord && <p className='flex justify-center items-center h-full'>{t('clickOneRowToViewDetail')}</p>}
+                            {selRecord && <ScrollArea>
                                 {<JsonViewer data={selRecord} />}
-                            </ScrollArea>
+                            </ScrollArea>}
                         </div>
                     )
                 }

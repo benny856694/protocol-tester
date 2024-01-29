@@ -13,6 +13,7 @@
     "protocolTester": "Protocol Tester",
     "httpServer": "HTTP Server",
     "details": "Details",
-    "httpServerUrl": "Data Upload Url"
+    "httpServerUrl": "Data Upload Url",
+    "clickOneRowToViewDetail": "Click a row in the left table to view details"
 
 }
