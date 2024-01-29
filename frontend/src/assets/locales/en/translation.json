@@ -12,6 +12,7 @@
     "copySucceed": "Data copied to clipboard",
     "protocolTester": "Protocol Tester",
     "httpServer": "HTTP Server",
-    "details": "Details"
+    "details": "Details",
+    "httpServerUrl": "Data Upload Url"
 
 }
