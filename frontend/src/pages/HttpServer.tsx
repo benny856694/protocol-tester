@@ -55,7 +55,7 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
 
     return (
         <div className='border h-full flex flex-col rounded overflow-y-auto'>
-            <div className='p-2 col-span-2 flex flex-row items-center'>
+            <div className='col-span-2 flex flex-row items-center bg-secondary px-2 py-1 mb-2'>
                 服务器上传数据URL: http://*:8080/upload/record
                 <Toggle className='ml-auto' size="sm" pressed={detailsVisible} onPressedChange={toggleDetailsView}><ReaderIcon className='h-4 w-4 p-0' /></Toggle>
             </div>
