@@ -11,6 +11,7 @@
     "open": "打开",
     "copySucceed": "数据拷贝成功",
     "protocolTester": "协议测试",
-    "httpServer": "HTTP 服务器"
+    "httpServer": "HTTP 服务器",
+    "details": "详情"
 
 }

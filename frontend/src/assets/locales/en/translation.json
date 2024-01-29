@@ -11,6 +11,7 @@
     "open": "Open",
     "copySucceed": "Data copied to clipboard",
     "protocolTester": "Protocol Tester",
-    "httpServer": "HTTP Server"
+    "httpServer": "HTTP Server",
+    "details": "Details"
 
 }

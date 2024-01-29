@@ -20,6 +20,7 @@ import JsonViewer from '@/components/json-viewer';
 import { normalizeImageData } from '@/lib/utils';
 import { ReaderIcon } from '@radix-ui/react-icons';
 import { Toggle } from '@/components/ui/toggle';
+import { useTranslation } from 'react-i18next';
 
 
 const recordsAtomConfig = atom<CaptureRecord[]>([])
@@ -31,6 +32,7 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
     const [currentRecord, setCurrentRecord] = React.useState<CaptureRecord>()
     const [selRecord, setSelRecord] = useAtom(selRecordAtomConfig)
     const [detailsVisible, setDetailsVisible] = useAtom(detailsVisibleAtomConfig)
+    const {t} = useTranslation()
 
     function addRecord(r: CaptureRecord) {
         setRecords([r, ...records])
@@ -57,7 +59,7 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
         <div className='h-full flex flex-col overflow-y-auto'>
             <div className='col-span-2 flex flex-row items-center border rounded px-2 py-1 mb-2'>
                 服务器上传数据URL: http://*:8080/upload/record
-                <Toggle className='ml-auto' size="sm" pressed={detailsVisible} onPressedChange={toggleDetailsView}><ReaderIcon className='h-4 w-4 p-0' /></Toggle>
+                <Toggle className='ml-auto' size="sm" pressed={detailsVisible} onPressedChange={toggleDetailsView}><ReaderIcon className='h-4 w-4 p-0 mr-1' />{t('details')}</Toggle>
             </div>
             <div className='flex-1 overflow-y-auto flex flex-row gap-2'>
                 <ScrollArea className='self-start flex-[2_2_0%] h-full rounded border'>
