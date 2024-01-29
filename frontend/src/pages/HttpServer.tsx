@@ -101,7 +101,7 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
                                 {selRecord?.closeup_pic?.data && <img src={normalizeImageData(selRecord?.closeup_pic?.data)} alt="closeup" width={64} height={64} />}
                                 {selRecord?.match?.image && <img src={normalizeImageData(selRecord?.match?.image)} alt="template" width={64} height={64} />}
                             </div>
-                            {!selRecord && <p className='flex justify-center items-center h-full'>{t('clickOneRowToViewDetail')}</p>}
+                            {!selRecord && <p className='flex justify-center items-center h-full text-center'>{t('clickOneRowToViewDetail')}</p>}
                             {selRecord && <ScrollArea>
                                 {<JsonViewer data={selRecord} />}
                             </ScrollArea>}
