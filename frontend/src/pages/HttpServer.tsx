@@ -56,18 +56,17 @@ export default function HttpServer({ records }: { records: CaptureRecord[] }) {
                         {/* <TableCaption>A list of your recent invoices.</TableCaption> */}
                         <TableHeader >
                             <TableRow className='sticky top-0'>
-                                <TableHead className="">Time</TableHead>
                                 <TableHead className="">Images</TableHead>
                                 <TableHead>Name</TableHead>
                                 <TableHead>ID</TableHead>
                                 {/* <TableHead>Sequence</TableHead> */}
                                 <TableHead className="">Device SN</TableHead>
+                                <TableHead className="">Time</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
                             {records.map((r) => (
                                 <TableRow onClick={() => setSelRecord(r)} key={r.cap_time + r.device_sn}>
-                                    <TableCell className="font-medium">{r.cap_time}</TableCell>
                                     <TableCell className={cn('w-full flex flex-row  gap-4')}>
                                         {r.closeup_pic?.data && <img className='rounded' src={normalizeImageData(r.closeup_pic?.data)} alt="closeup" width={smallThumbnailSize} height={smallThumbnailSize} />}
                                         {r.match?.image && <img className='rounded' src={normalizeImageData(r.match?.image)} alt="template" width={smallThumbnailSize} height={smallThumbnailSize} />}
@@ -76,6 +75,7 @@ export default function HttpServer({ records }: { records: CaptureRecord[] }) {
                                     <TableCell>{r.match?.person_id}</TableCell>
                                     {/* <TableCell>{r.sequence_no}</TableCell> */}
                                     <TableCell className="">{r.device_sn}</TableCell>
+                                    <TableCell className="font-medium">{r.cap_time}</TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
