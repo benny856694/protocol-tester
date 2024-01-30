@@ -138,7 +138,7 @@ func echoServer(a *App) {
 		runtime.EventsEmit(a.ctx, "capture-record", r)
 		return c.JSON(http.StatusOK, map[string]interface{}{"reply": "ACK", "cmd": "face", "code": 0, "cap_time": r.CapTime, "sequence_no": r.SequenceNo})
 	})
-	port := 8080
+	port := 18080
 	log.Fatal(e.Start(fmt.Sprintf(":%d", port)))
 }
 

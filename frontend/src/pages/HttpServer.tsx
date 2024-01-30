@@ -60,7 +60,7 @@ export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureR
     return (
         <div className='h-full flex flex-col overflow-y-auto'>
             <div className='col-span-2 flex flex-row items-center border rounded px-2 py-1 mb-2'>
-                {t('httpServerUrl')}: http://*:8080/upload/record
+                {t('httpServerUrl')}: http://*:18080/upload/record
                 <Toggle className='ml-auto' size="sm" pressed={detailsVisible} onPressedChange={toggleDetailsView}><ReaderIcon className='h-4 w-4 p-0 mr-1' />{t('details')}</Toggle>
             </div>
             <div className='flex-1 overflow-y-auto flex flex-row gap-2'>

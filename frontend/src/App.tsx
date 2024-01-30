@@ -41,7 +41,7 @@ function App() {
         <div className="flex-1 overflow-y-auto">
           <Routes>
             <Route path="/" element={<Test />} />
-            <Route path="/httpsvr" element={<HttpServer onNewRecord={()=>setCount(count+1)} />} />
+            <Route path="/httpsvr" element={<HttpServer />} />
             <Route path="/test" element={<Test />} />
           </Routes>
         </div>
