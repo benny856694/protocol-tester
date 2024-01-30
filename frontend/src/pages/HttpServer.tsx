@@ -25,37 +25,24 @@ import { useTranslation } from 'react-i18next';
 const smallThumbnailSize = 32
 const bigThumbnailSize = 100
 
-const recordsAtomConfig = atom<CaptureRecord[]>([])
+
 const selRecordAtomConfig = atom<CaptureRecord | null>(null)
 const detailsVisibleAtomConfig = atom(false)
 
-export default function HttpServer({ onNewRecord }: { onNewRecord?: (r: CaptureRecord) => void }) {
-    const [records, setRecords] = useAtom(recordsAtomConfig)
-    const [currentRecord, setCurrentRecord] = React.useState<CaptureRecord>()
+export default function HttpServer({ records }: { records: CaptureRecord[] }) {
     const [selRecord, setSelRecord] = useAtom(selRecordAtomConfig)
     const [detailsVisible, setDetailsVisible] = useAtom(detailsVisibleAtomConfig)
     const { t } = useTranslation()
 
-    function addRecord(r: CaptureRecord) {
-        setRecords([r, ...records])
-    }
+    
 
     function toggleDetailsView() {
         setDetailsVisible(!detailsVisible)
     }
 
-    React.useEffect(() => {
-        return EventsOn('capture-record', r => {
-            setCurrentRecord(r);
-        });
-    }, []);
+   
 
-    React.useEffect(() => {
-        if (currentRecord) {
-            addRecord(currentRecord)
-            onNewRecord?.(currentRecord)
-        }
-    }, [currentRecord])
+
 
     return (
         <div className='h-full flex flex-col overflow-y-auto'>
