@@ -124,6 +124,9 @@
       "long_card_id": 9223372036854775807,
       "ctrl_mode": "force",
       "person_id": "0001"
+    },
+    "reboot": {
+      "cmd": "reboot"
     }
   },
   "Device Parameters": {
