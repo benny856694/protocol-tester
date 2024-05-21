@@ -14,6 +14,7 @@
     "httpServer": "HTTP Server",
     "details": "Details",
     "httpServerUrl": "Data Upload Url",
-    "clickOneRowToViewDetail": "Click a row in the left table to view details"
+    "clickOneRowToViewDetail": "Click a row in the left table to view details",
+    "httpConfigToolTip": "To configure upload, go to: More parameters/Data upload/Upload way"
 
 }

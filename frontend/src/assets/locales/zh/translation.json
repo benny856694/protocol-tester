@@ -14,7 +14,8 @@
     "httpServer": "HTTP 服务器",
     "details": "详情",
     "httpServerUrl": "数据上传Url",
-    "clickOneRowToViewDetail": "单击左侧表格中的一行数据以查看详情"
+    "clickOneRowToViewDetail": "单击左侧表格中的一行数据以查看详情",
+    "httpConfigToolTip": "配置上传方式路径：更多参数/数据上传/上传方式"
 
 
 }

@@ -18,9 +18,13 @@ import { atom, useAtom } from 'jotai';
 import { JsonView } from 'react-json-view-lite';
 import JsonViewer from '@/components/json-viewer';
 import { cn, normalizeImageData } from '@/lib/utils';
-import { ReaderIcon } from '@radix-ui/react-icons';
+import { ReaderIcon, QuestionMarkCircledIcon } from '@radix-ui/react-icons';
 import { Toggle } from '@/components/ui/toggle';
 import { useTranslation } from 'react-i18next';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
+import httpconfig_en from '../assets/locales/en/httpconfig.png';
+import httpconfig_zh from '../assets/locales/zh/httpconfig.png';
+import i18next from "i18next";
 
 const smallThumbnailSize = 32
 const bigThumbnailSize = 100
@@ -34,13 +38,13 @@ export default function HttpServer({ records }: { records: CaptureRecord[] }) {
     const [detailsVisible, setDetailsVisible] = useAtom(detailsVisibleAtomConfig)
     const { t } = useTranslation()
 
-    
+
 
     function toggleDetailsView() {
         setDetailsVisible(!detailsVisible)
     }
 
-   
+
 
 
 
@@ -48,6 +52,18 @@ export default function HttpServer({ records }: { records: CaptureRecord[] }) {
         <div className='h-full flex flex-col overflow-y-auto'>
             <div className='col-span-2 flex flex-row items-center border rounded px-2 py-1 mb-2'>
                 {t('httpServerUrl')}: http://*:18080/upload/record
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger>
+                                <QuestionMarkCircledIcon className='h-4 w-4 p-0 ml-1' />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p className='text- mb-2'>{t('httpConfigToolTip')}</p>
+                                <img src={i18next.resolvedLanguage === 'zh' ? httpconfig_zh : httpconfig_en} alt="httpserver config" />
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+
                 <Toggle className='ml-auto' size="sm" pressed={detailsVisible} onPressedChange={toggleDetailsView}><ReaderIcon className='h-4 w-4 p-0 mr-1' />{t('details')}</Toggle>
             </div>
             <div className='flex-1 overflow-y-auto flex flex-row gap-2'>
