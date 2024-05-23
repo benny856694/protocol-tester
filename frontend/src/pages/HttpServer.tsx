@@ -53,7 +53,7 @@ export default function HttpServer({ records }: { records: CaptureRecord[] }) {
             <div className='col-span-2 flex flex-row items-center border rounded px-2 py-1 mb-2'>
                 {t('httpServerUrl')}: http://*:18080/upload/record
                 <TooltipProvider>
-                    <Tooltip>
+                    <Tooltip delayDuration={100}>
                         <TooltipTrigger>
                             <QuestionMarkCircledIcon className='h-4 w-4 p-0 ml-1' />
                         </TooltipTrigger>
