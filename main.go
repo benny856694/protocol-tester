@@ -135,8 +135,12 @@ func echoServer(a *App) {
 		c.Bind(&r)
 		//bytes,_ := r.Marshal()
 		//data := string(bytes)
-		runtime.EventsEmit(a.ctx, "capture-record", r)
-		return c.JSON(http.StatusOK, map[string]interface{}{"reply": "ACK", "cmd": "face", "code": 0, "cap_time": r.CapTime, "sequence_no": r.SequenceNo})
+		if (r.Cmd == "face") {
+			runtime.EventsEmit(a.ctx, "capture-record", r)
+			return c.JSON(http.StatusOK, map[string]interface{}{"reply": "ACK", "cmd": "face", "code": 0, "cap_time": r.CapTime, "sequence_no": r.SequenceNo})
+		} else  {
+			return c.NoContent(http.StatusOK)
+		}
 	})
 	port := 18080
 	log.Fatal(e.Start(fmt.Sprintf(":%d", port)))
