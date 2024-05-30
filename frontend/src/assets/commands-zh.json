@@ -529,6 +529,9 @@
     },
     "get version(获取版本信息)": {
       "cmd": "get version"
+    },
+    "snapshot(截图)": {
+      "cmd": "snapshot"
     }
   }
 }
