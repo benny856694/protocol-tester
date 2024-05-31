@@ -58,7 +58,7 @@ export default function HttpServer({ records }: { records: CaptureRecord[] }) {
                             <QuestionMarkCircledIcon className='h-4 w-4 p-0 ml-1' />
                         </TooltipTrigger>
                         <TooltipContent>
-                            <p className='text- mb-2'>{t('httpConfigToolTip')}</p>
+                            <p className='text- mb-2 max-w-lg'>{t('httpConfigToolTip')}</p>
                             <img className='rounded' src={i18next.resolvedLanguage === 'zh' ? httpconfig_zh : httpconfig_en} alt="httpserver config" />
                         </TooltipContent>
                     </Tooltip>
