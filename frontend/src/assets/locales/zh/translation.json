@@ -15,7 +15,7 @@
     "details": "详情",
     "httpServerUrl": "数据上传Url",
     "clickOneRowToViewDetail": "单击左侧表格中的一行数据以查看详情",
-    "httpConfigToolTip": "配置上传方式路径：更多参数/数据上传/上传方式",
+    "httpConfigToolTip": "配置上传方式路径：更多参数/数据上传/上传方式。你还需要配置防火墙规则以使该端口可以被访问。",
     "noRecord": "尚未接收到任何数据"
 
 
