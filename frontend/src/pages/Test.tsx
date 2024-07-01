@@ -115,7 +115,7 @@ export default function () {
 
     }
 
- 
+
 
     async function openInBrowser() {
         const url = buildUrl(urlOrIp, true)
@@ -132,7 +132,7 @@ export default function () {
         <div className="flex flex-col h-full gap-4">
             <div className="flex flex-row items-center gap-x-4">
                 <MethodCombobox items={items} selectedValue={method} onSelect={(v) => setMethod(v as 'get' | 'post')} />
-                <Label className="flex items-center gap-2 ">URL:
+                <Label className="flex items-center gap-2 ">IP/URL:
                     <TooltipProvider>
                         <Tooltip delayDuration={0}>
                             <TooltipTrigger asChild>
@@ -164,7 +164,7 @@ export default function () {
                     <ExternalLinkIcon className="ml-2 h-4 w-4" />
                 </Button>
 
-                
+
 
             </div>
             <div className="flex-1 grid grid-cols-2 grid-rows-[auto_1fr] gap-2 overflow-y-auto">
@@ -189,9 +189,9 @@ export default function () {
                     </Textarea>
                     {jsonValidateMsg && <p className="text-red-600 text-sm absolute left-px rounded-tl top-px px-1 bg-background">{t(jsonValidateMsg)}</p>}
                 </div>
-                    <ScrollArea className="border rounded">
-                        {res && <JsonViewer data={res} />}
-                    </ScrollArea>
+                <ScrollArea className="border rounded">
+                    {res && <JsonViewer data={res} />}
+                </ScrollArea>
             </div>
         </div>
     )
